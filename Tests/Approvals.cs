@@ -6,7 +6,7 @@ namespace Tests;
 public class Approvals
 {
     [Theory]
-    [InlineData(typeof(Project.Class1))]
+    [InlineData(typeof(Shane32.EnphaseAPI.Class1))]
     public void ApiTest(Type type)
     {
         var api = type.Assembly.GeneratePublicApi(
