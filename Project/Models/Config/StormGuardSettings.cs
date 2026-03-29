@@ -1,0 +1,10 @@
+using System.Text.Json.Serialization;
+
+namespace Shane32.EnphaseAPI.Models;
+
+public class StormGuardSettings
+{
+    [JsonPropertyName("system_id")] public int SystemId { get; set; }
+    [JsonPropertyName("storm_guard_status")] public string? StormGuardStatus { get; set; }
+    [JsonPropertyName("storm_alert")] public string? StormAlert { get; set; }
+}

@@ -1,5 +1,1 @@
-namespace Shane32.EnphaseAPI;
-
-public class Class1
-{
-}
+// This file intentionally left empty.
