@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Project\Project.csproj" />
+    <ProjectReference Include="..\Project\Shane32.EnphaseAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

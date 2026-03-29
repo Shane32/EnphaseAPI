@@ -12,6 +12,6 @@
     <File Path=".github/workflows/test.yml" />
     <File Path=".github/workflows/publish.yml" />
   </Folder>
-  <Project Path="Project/Project.csproj" />
+  <Project Path="Project/Shane32.EnphaseAPI.csproj" />
   <Project Path="Tests/Tests.csproj" />
 </Solution>
