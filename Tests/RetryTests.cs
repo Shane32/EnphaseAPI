@@ -49,7 +49,7 @@ public class RetryTests
     private static readonly string _authErrorJson = @"{""message"":""Not Authorized"",""details"":""User is not authorized"",""code"":401}";
 
     [Fact]
-    public async Task NoRetry_WhenRetryCountIsZero()
+    public async Task NoRetry_WhenRetryCountIsZeroAsync()
     {
         var client = CreateClient(retryCount: 0);
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
@@ -61,7 +61,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_OnRateLimit_EventuallySucceeds()
+    public async Task Retry_OnRateLimit_EventuallySucceedsAsync()
     {
         var client = CreateClient(retryCount: 2);
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
@@ -74,7 +74,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_ExhaustedRetries_ThrowsLastException()
+    public async Task Retry_ExhaustedRetries_ThrowsLastExceptionAsync()
     {
         var client = CreateClient(retryCount: 2);
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
@@ -87,7 +87,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task NoRetry_OnNonRetriableException()
+    public async Task NoRetry_OnNonRetriableExceptionAsync()
     {
         var client = CreateClient(retryCount: 3);
         _responses.Enqueue(JsonResponse(_authErrorJson, HttpStatusCode.Unauthorized));
@@ -98,7 +98,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_OnHttpRequestException_EventuallySucceeds()
+    public async Task Retry_OnHttpRequestException_EventuallySucceedsAsync()
     {
         var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
         int callCount = 0;
@@ -127,7 +127,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_WithDelay_RecordsCorrectDelays()
+    public async Task Retry_WithDelay_RecordsCorrectDelaysAsync()
     {
         var client = CreateClient(retryCount: 2, retryDelay: TimeSpan.FromSeconds(1));
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
@@ -142,7 +142,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_WithBackoff_AppliesMultiplierToDelay()
+    public async Task Retry_WithBackoff_AppliesMultiplierToDelayAsync()
     {
         var client = CreateClient(retryCount: 3, retryDelay: TimeSpan.FromSeconds(1), backoffMultiplier: 2.0);
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
@@ -159,7 +159,7 @@ public class RetryTests
     }
 
     [Fact]
-    public async Task Retry_WithZeroDelay_DoesNotCallTimeProviderCreateTimer()
+    public async Task Retry_WithZeroDelay_DoesNotCallTimeProviderCreateTimerAsync()
     {
         var client = CreateClient(retryCount: 2, retryDelay: TimeSpan.Zero);
         _responses.Enqueue(JsonResponse(_rateLimitJson, HttpStatusCode.TooManyRequests));
