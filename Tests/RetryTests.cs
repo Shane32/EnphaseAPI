@@ -13,7 +13,7 @@ public class RetryTests
     private readonly Queue<HttpResponseMessage> _responses = new();
     private readonly FakeTimeProvider _fakeTimeProvider = new();
 
-    private IEnphaseClient CreateClient(int retryCount, TimeSpan? retryDelay = null, double? backoffMultiplier = null)
+    private EnphaseClient CreateClient(int retryCount, TimeSpan? retryDelay = null, double? backoffMultiplier = null)
     {
         var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
         handlerMock
@@ -172,12 +172,11 @@ public class RetryTests
 
     private sealed class FakeTimeProvider : TimeProvider
     {
-        private readonly List<TimeSpan> _recordedDelays = new();
-        public IReadOnlyList<TimeSpan> RecordedDelays => _recordedDelays;
+        public List<TimeSpan> RecordedDelays { get; } = new();
 
         public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
         {
-            _recordedDelays.Add(dueTime);
+            RecordedDelays.Add(dueTime);
             callback(state);
             return new NopTimer();
         }

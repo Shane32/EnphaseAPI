@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Shane32.EnphaseAPI.Models;
 
-public class DeviceCollection
+public class DeviceGroup
 {
     [JsonPropertyName("micros")] public List<DeviceInfo>? Micros { get; set; }
     [JsonPropertyName("meters")] public List<MeterDevice>? Meters { get; set; }

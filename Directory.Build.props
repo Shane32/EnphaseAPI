@@ -19,7 +19,7 @@
     <IsPackable>false</IsPackable>
     <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <WarningsAsErrors>true</WarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AnalysisMode>Recommended</AnalysisMode>
   </PropertyGroup>
 

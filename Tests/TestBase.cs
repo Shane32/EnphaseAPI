@@ -7,12 +7,12 @@ using Shouldly;
 
 namespace Tests;
 
-public abstract class TestBase
+public abstract class TestBase : IDisposable
 {
     private HttpRequestMessage? _capturedRequest;
     private string? _capturedRequestBody;
     private HttpResponseMessage? _response;
-    protected readonly IEnphaseClient Client;
+    protected IEnphaseClient Client { get; }
     private const string TEST_ACCESS_TOKEN = "test-token";
     private const string TEST_API_KEY = "test-api-key";
 
@@ -24,10 +24,10 @@ public abstract class TestBase
             .Setup<Task<HttpResponseMessage>>("SendAsync",
                 ItExpr.IsAny<HttpRequestMessage>(),
                 ItExpr.IsAny<CancellationToken>())
-            .Returns(async (HttpRequestMessage request, CancellationToken _) => {
+            .Returns(async (HttpRequestMessage request, CancellationToken cancellationToken) => {
                 _capturedRequest = request;
                 _capturedRequestBody = request.Content != null
-                    ? await request.Content.ReadAsStringAsync()
+                    ? await request.Content.ReadAsStringAsync(cancellationToken)
                     : null;
                 return _response!;
             });
@@ -38,6 +38,12 @@ public abstract class TestBase
         var options = Options.Create(new EnphaseClientOptions { ApiKey = TEST_API_KEY });
         Client = new EnphaseClient(httpClient, options, timeProvider ?? TimeProvider.System);
         Client.AccessToken = TEST_ACCESS_TOKEN;
+    }
+
+    public void Dispose()
+    {
+        _response?.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     protected void SetupJsonResponse(string json, HttpStatusCode statusCode = HttpStatusCode.OK)

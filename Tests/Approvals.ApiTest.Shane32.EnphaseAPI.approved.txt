@@ -294,9 +294,9 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("enwh")]
         public long? Enwh { get; set; }
     }
-    public class DeviceCollection
+    public class DeviceGroup
     {
-        public DeviceCollection() { }
+        public DeviceGroup() { }
         [System.Text.Json.Serialization.JsonPropertyName("acbs")]
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? Acbs { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("encharges")]
@@ -1228,7 +1228,7 @@ namespace Shane32.EnphaseAPI.Models
     {
         public SystemDevices() { }
         [System.Text.Json.Serialization.JsonPropertyName("devices")]
-        public Shane32.EnphaseAPI.Models.DeviceCollection? Devices { get; set; }
+        public Shane32.EnphaseAPI.Models.DeviceGroup? Devices { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("items")]
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
