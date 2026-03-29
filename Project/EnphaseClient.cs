@@ -13,18 +13,28 @@ using Shane32.EnphaseAPI.Models;
 
 namespace Shane32.EnphaseAPI;
 
+/// <summary>
+/// Client that wraps the Enphase solar energy API.
+/// </summary>
 public class EnphaseClient : IEnphaseClient
 {
     private readonly HttpClient _httpClient;
     private readonly EnphaseClientOptions _options;
     private readonly TimeProvider _timeProvider;
 
+    /// <inheritdoc/>
     public string AccessToken { get; set; } = string.Empty;
 
     private static readonly JsonSerializerOptions _jsonOptions = new() {
         PropertyNameCaseInsensitive = true,
     };
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="EnphaseClient"/>.
+    /// </summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> used to send requests.</param>
+    /// <param name="options">Configuration options for the client.</param>
+    /// <param name="timeProvider">Time provider used for retry delays.</param>
     public EnphaseClient(HttpClient httpClient, IOptions<EnphaseClientOptions> options, TimeProvider timeProvider)
     {
         _httpClient = httpClient;
@@ -64,6 +74,12 @@ public class EnphaseClient : IEnphaseClient
         await tcs.Task.ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// Sends an authenticated HTTP GET request to the specified URL and deserializes the response.
+    /// </summary>
+    /// <typeparam name="TResponse">The type to deserialize the response body into.</typeparam>
+    /// <param name="url">The request URL (relative to the base address).</param>
+    /// <returns>The deserialized response.</returns>
     protected virtual Task<TResponse> GetAsync<TResponse>(string url)
         => ExecuteWithRetryAsync(async () => {
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
@@ -73,6 +89,13 @@ public class EnphaseClient : IEnphaseClient
             return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
         });
 
+    /// <summary>
+    /// Sends an authenticated HTTP POST request to the specified URL with an optional JSON body and deserializes the response.
+    /// </summary>
+    /// <typeparam name="TResponse">The type to deserialize the response body into.</typeparam>
+    /// <param name="url">The request URL (relative to the base address).</param>
+    /// <param name="body">Optional object to serialize as the request body.</param>
+    /// <returns>The deserialized response.</returns>
     protected virtual Task<TResponse> PostAsync<TResponse>(string url, object? body = null)
         => ExecuteWithRetryAsync(async () => {
             using var request = new HttpRequestMessage(HttpMethod.Post, url);
@@ -85,6 +108,13 @@ public class EnphaseClient : IEnphaseClient
             return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
         });
 
+    /// <summary>
+    /// Sends an authenticated HTTP PUT request to the specified URL with an optional JSON body and deserializes the response.
+    /// </summary>
+    /// <typeparam name="TResponse">The type to deserialize the response body into.</typeparam>
+    /// <param name="url">The request URL (relative to the base address).</param>
+    /// <param name="body">Optional object to serialize as the request body.</param>
+    /// <returns>The deserialized response.</returns>
     protected virtual Task<TResponse> PutAsync<TResponse>(string url, object? body = null)
         => ExecuteWithRetryAsync(async () => {
             using var request = new HttpRequestMessage(HttpMethod.Put, url);
@@ -172,50 +202,61 @@ public class EnphaseClient : IEnphaseClient
 
     // === Systems ===
 
+    /// <inheritdoc/>
     public Task<GetSystemsResponse> GetSystemsAsync(int? page = null, int? size = null, string? sortBy = null)
         => GetAsync<GetSystemsResponse>(BuildUrl("/api/v4/systems",
             ("page", page?.ToString(CultureInfo.InvariantCulture)),
             ("size", size?.ToString(CultureInfo.InvariantCulture)),
             ("sort_by", sortBy)));
 
+    /// <inheritdoc/>
     public Task<GetSystemsResponse> SearchSystemsAsync(SearchSystemsRequest request, int? page = null, int? size = null, bool? liveStream = null)
         => PostAsync<GetSystemsResponse>(BuildUrl("/api/v4/systems/search",
             ("page", page?.ToString(CultureInfo.InvariantCulture)),
             ("size", size?.ToString(CultureInfo.InvariantCulture)),
             ("live_stream", liveStream?.ToString().ToLowerInvariant())), request);
 
+    /// <inheritdoc/>
     public Task<SystemInfo> GetSystemAsync(int systemId)
         => GetAsync<SystemInfo>($"/api/v4/systems/{systemId}");
 
+    /// <inheritdoc/>
     public Task<SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null)
         => GetAsync<SystemSummary>(BuildUrl($"/api/v4/systems/{systemId}/summary",
             ("summary_date", summaryDate)));
 
+    /// <inheritdoc/>
     public Task<SystemDevices> GetSystemDevicesAsync(int systemId)
         => GetAsync<SystemDevices>($"/api/v4/systems/{systemId}/devices");
 
+    /// <inheritdoc/>
     public Task<RetrieveSystemIdResponse> RetrieveSystemIdAsync(string serialNum)
         => GetAsync<RetrieveSystemIdResponse>(BuildUrl("/api/v4/systems/retrieve_system_id",
             ("serial_num", serialNum)));
 
+    /// <inheritdoc/>
     public Task<GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = null)
         => GetAsync<GetSystemEventsResponse>(BuildUrl($"/api/v4/systems/{systemId}/events",
             ("start_time", startTime.ToString(CultureInfo.InvariantCulture)),
             ("end_time", endTime?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = null, bool? cleared = null)
         => GetAsync<GetSystemAlarmsResponse>(BuildUrl($"/api/v4/systems/{systemId}/alarms",
             ("start_time", startTime.ToString(CultureInfo.InvariantCulture)),
             ("end_time", endTime?.ToString(CultureInfo.InvariantCulture)),
             ("cleared", cleared?.ToString().ToLowerInvariant())));
 
+    /// <inheritdoc/>
     public Task<GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = null)
         => GetAsync<GetEventTypesResponse>(BuildUrl("/api/v4/systems/event_types",
             ("event_type_id", eventTypeId?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetOpenEventsResponse> GetOpenEventsAsync(int systemId)
         => GetAsync<GetOpenEventsResponse>($"/api/v4/systems/{systemId}/open_events");
 
+    /// <inheritdoc/>
     public Task<List<InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = null, int? envoySerialNumber = null, int? page = null, int? size = null)
         => GetAsync<List<InvertersSummaryItem>>(BuildUrl("/api/v4/systems/inverters_summary_by_envoy_or_site",
             ("site_id", siteId?.ToString(CultureInfo.InvariantCulture)),
@@ -225,26 +266,31 @@ public class EnphaseClient : IEnphaseClient
 
     // === Production ===
 
+    /// <inheritdoc/>
     public Task<GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = null)
         => GetAsync<GetProductionMeterReadingsResponse>(BuildUrl($"/api/v4/systems/{systemId}/production_meter_readings",
             ("end_at", endAt?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = null, long? endAt = null)
         => GetAsync<GetRgmStatsResponse>(BuildUrl($"/api/v4/systems/{systemId}/rgm_stats",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("end_at", endAt?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null)
         => GetAsync<GetEnergyLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_lifetime",
             ("start_date", startDate),
             ("end_date", endDate),
             ("production", production)));
 
+    /// <inheritdoc/>
     public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetProductionMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/production_micro",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetProductionMeterTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/production_meter",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
@@ -252,85 +298,102 @@ public class EnphaseClient : IEnphaseClient
 
     // === Consumption ===
 
+    /// <inheritdoc/>
     public Task<GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = null)
         => GetAsync<GetConsumptionMeterReadingsResponse>(BuildUrl($"/api/v4/systems/{systemId}/consumption_meter_readings",
             ("end_at", endAt?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = null)
         => GetAsync<GetStorageMeterReadingsResponse>(BuildUrl($"/api/v4/systems/{systemId}/storage_meter_readings",
             ("end_at", endAt?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null)
         => GetAsync<GetConsumptionLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/consumption_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null)
         => GetAsync<GetBatteryLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/battery_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null)
         => GetAsync<GetEnergyImportLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_import_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null)
         => GetAsync<GetEnergyExportLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_export_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetBatteryTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/battery",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetConsumptionMeterTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/consumption_meter",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetEnergyImportTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_import_telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = null, string? granularity = null)
         => GetAsync<GetEnergyExportTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_export_telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId)
         => GetAsync<GetLatestTelemetryResponse>($"/api/v4/systems/{systemId}/latest_telemetry");
 
     // === Devices ===
 
+    /// <inheritdoc/>
     public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null)
         => GetAsync<GetMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/micros/{serialNo}/telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null)
         => GetAsync<GetEnchargeTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/encharges/{serialNo}/telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity)));
 
+    /// <inheritdoc/>
     public Task<GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null)
         => GetAsync<GetEvseLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/{serialNo}/evse_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null, string? intervalDuration = null)
         => GetAsync<GetEvseTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/{serialNo}/evse_telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
             ("granularity", granularity),
             ("interval_duration", intervalDuration)));
 
+    /// <inheritdoc/>
     public Task<GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null)
         => GetAsync<GetHpLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/hp_lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = null, string? startDate = null, string? granularity = null, string? intervalDuration = null)
         => GetAsync<GetHpTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/hp_telemetry",
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture)),
@@ -340,54 +403,67 @@ public class EnphaseClient : IEnphaseClient
 
     // === Config ===
 
+    /// <inheritdoc/>
     public Task<BatterySettings> GetBatterySettingsAsync(int systemId)
         => GetAsync<BatterySettings>($"/api/v4/systems/config/{systemId}/battery_settings");
 
+    /// <inheritdoc/>
     public Task<BatterySettings> UpdateBatterySettingsAsync(int systemId, UpdateBatterySettingsRequest request)
         => PutAsync<BatterySettings>($"/api/v4/systems/config/{systemId}/battery_settings", request);
 
+    /// <inheritdoc/>
     public Task<StormGuardSettings> GetStormGuardAsync(int systemId)
         => GetAsync<StormGuardSettings>($"/api/v4/systems/config/{systemId}/storm_guard");
 
+    /// <inheritdoc/>
     public Task<GridStatus> GetGridStatusAsync(int systemId)
         => GetAsync<GridStatus>($"/api/v4/systems/config/{systemId}/grid_status");
 
+    /// <inheritdoc/>
     public Task<GetLoadControlResponse> GetLoadControlAsync(int systemId)
         => GetAsync<GetLoadControlResponse>($"/api/v4/systems/config/{systemId}/load_control");
 
     // === EV Charger ===
 
+    /// <inheritdoc/>
     public Task<EvChargerDevices> GetEvChargerDevicesAsync(int systemId)
         => GetAsync<EvChargerDevices>($"/api/v4/systems/{systemId}/ev_charger/devices");
 
+    /// <inheritdoc/>
     public Task<GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = null, string? serialNum = null, int? limit = null)
         => GetAsync<GetEvChargerEventsResponse>(BuildUrl($"/api/v4/systems/{systemId}/ev_charger/events",
             ("offset", offset?.ToString(CultureInfo.InvariantCulture)),
             ("serial_num", serialNum),
             ("limit", limit?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = null, int? limit = null)
         => GetAsync<GetEvChargerSessionsResponse>(BuildUrl($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/sessions",
             ("offset", offset?.ToString(CultureInfo.InvariantCulture)),
             ("limit", limit?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo)
         => GetAsync<GetEvChargerSchedulesResponse>($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/schedules");
 
+    /// <inheritdoc/>
     public Task<GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null)
         => GetAsync<GetEvChargerLifetimeResponse>(BuildUrl($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/lifetime",
             ("start_date", startDate),
             ("end_date", endDate)));
 
+    /// <inheritdoc/>
     public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = null)
         => GetAsync<GetEvChargerTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/telemetry",
             ("granularity", granularity),
             ("start_date", startDate),
             ("start_at", startAt?.ToString(CultureInfo.InvariantCulture))));
 
+    /// <inheritdoc/>
     public Task<ChargingCommandResponse> StartChargingAsync(int systemId, string serialNo, StartChargingRequest request)
         => PostAsync<ChargingCommandResponse>($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/start_charging", request);
 
+    /// <inheritdoc/>
     public Task<ChargingCommandResponse> StopChargingAsync(int systemId, string serialNo)
         => PostAsync<ChargingCommandResponse>($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/stop_charging");
 }
