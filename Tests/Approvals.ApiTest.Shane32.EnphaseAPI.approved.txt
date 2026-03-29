@@ -266,19 +266,19 @@ namespace Shane32.EnphaseAPI.Models
     {
         public ChargingSession() { }
         [System.Text.Json.Serialization.JsonPropertyName("charge_time")]
-        public long? ChargeTime { get; set; }
+        public long ChargeTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("cost")]
-        public double? Cost { get; set; }
+        public double Cost { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("duration")]
-        public long? Duration { get; set; }
+        public long Duration { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("end_time")]
-        public long? EndTime { get; set; }
+        public long EndTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("energy_added")]
-        public double? EnergyAdded { get; set; }
+        public double EnergyAdded { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("miles_added")]
-        public double? MilesAdded { get; set; }
+        public double MilesAdded { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("start_time")]
-        public long? StartTime { get; set; }
+        public long StartTime { get; set; }
     }
     public class ConsumptionMeterInterval
     {
@@ -375,8 +375,6 @@ namespace Shane32.EnphaseAPI.Models
         public string? Firmware { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string? Id { get; set; }
-        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -398,7 +396,7 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("items")]
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public int? SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
         public int? TotalDevices { get; set; }
     }
@@ -424,7 +422,7 @@ namespace Shane32.EnphaseAPI.Models
     {
         public EvChargerTelemetryInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
-        public long? Consumption { get; set; }
+        public int? Consumption { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
         public long? EndAt { get; set; }
     }
@@ -658,7 +656,7 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("events")]
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerEvent>? Events { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public int? SystemId { get; set; }
     }
     public class GetEvChargerLifetimeResponse
     {
@@ -668,7 +666,7 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
         public string? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public long? SystemId { get; set; }
     }
     public class GetEvChargerSchedulesResponse
     {
@@ -676,15 +674,15 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("charger_schedules")]
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargerSchedule>? ChargerSchedules { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public int? SystemId { get; set; }
     }
     public class GetEvChargerSessionsResponse
     {
         public GetEvChargerSessionsResponse() { }
         [System.Text.Json.Serialization.JsonPropertyName("count")]
-        public int? Count { get; set; }
+        public int Count { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("sessions")]
-        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargingSession>? Sessions { get; set; }
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargingSession> Sessions { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -704,7 +702,7 @@ namespace Shane32.EnphaseAPI.Models
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
         public string? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
-        public int SystemId { get; set; }
+        public int? SystemId { get; set; }
     }
     public class GetEventTypesResponse
     {
