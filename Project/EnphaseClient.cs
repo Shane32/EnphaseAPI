@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,6 +16,7 @@ public class EnphaseClient : IEnphaseClient
 {
     private readonly HttpClient _httpClient;
     private readonly EnphaseClientOptions _options;
+    private readonly TimeProvider _timeProvider;
 
     public string AccessToken { get; set; } = string.Empty;
 
@@ -22,44 +24,77 @@ public class EnphaseClient : IEnphaseClient
         PropertyNameCaseInsensitive = true,
     };
 
-    public EnphaseClient(HttpClient httpClient, IOptions<EnphaseClientOptions> options)
+    public EnphaseClient(HttpClient httpClient, IOptions<EnphaseClientOptions> options, TimeProvider timeProvider)
     {
         _httpClient = httpClient;
         _options = options.Value;
+        _timeProvider = timeProvider;
     }
 
-    protected virtual async Task<TResponse> GetAsync<TResponse>(string url)
-    {
-        using var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-        request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
-        using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
-        return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
-    }
+    private static bool IsRetriableException(Exception ex)
+        => ex is EnphaseRateLimitException || ex is HttpRequestException;
 
-    protected virtual async Task<TResponse> PostAsync<TResponse>(string url, object? body = null)
+    private async Task<TResponse> ExecuteWithRetryAsync<TResponse>(Func<Task<TResponse>> operation)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-        request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
-        if (body != null) {
-            request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
+        var maxRetries = _options.RetryCount;
+        var delay = _options.RetryDelay;
+        var backoffMultiplier = _options.RetryBackoffMultiplier;
+
+        int attempt = 0;
+        while (true) {
+            try {
+                return await operation().ConfigureAwait(false);
+            } catch (Exception ex) when (attempt < maxRetries && IsRetriableException(ex)) {
+                attempt++;
+                if (delay > TimeSpan.Zero) {
+                    await DelayAsync(delay).ConfigureAwait(false);
+                    delay = TimeSpan.FromMilliseconds(delay.TotalMilliseconds * backoffMultiplier);
+                }
+            }
         }
-        using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
-        return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
     }
 
-    protected virtual async Task<TResponse> PutAsync<TResponse>(string url, object? body = null)
+    private async Task DelayAsync(TimeSpan delay)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Put, url);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-        request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
-        if (body != null) {
-            request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
-        }
-        using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
-        return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
+        var tcs = new TaskCompletionSource<bool>();
+        // The 'using' disposes the timer only after tcs.Task completes (i.e. after the callback fires).
+        using var timer = _timeProvider.CreateTimer(
+            _ => tcs.TrySetResult(true), null, delay, System.Threading.Timeout.InfiniteTimeSpan);
+        await tcs.Task.ConfigureAwait(false);
     }
+
+    protected virtual Task<TResponse> GetAsync<TResponse>(string url)
+        => ExecuteWithRetryAsync(async () => {
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+            request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
+            using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
+        });
+
+    protected virtual Task<TResponse> PostAsync<TResponse>(string url, object? body = null)
+        => ExecuteWithRetryAsync(async () => {
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+            request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
+            if (body != null) {
+                request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
+            }
+            using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
+        });
+
+    protected virtual Task<TResponse> PutAsync<TResponse>(string url, object? body = null)
+        => ExecuteWithRetryAsync(async () => {
+            using var request = new HttpRequestMessage(HttpMethod.Put, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+            request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
+            if (body != null) {
+                request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
+            }
+            using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            return await ProcessResponseAsync<TResponse>(response).ConfigureAwait(false);
+        });
 
     private static async Task<TResponse> ProcessResponseAsync<TResponse>(HttpResponseMessage response)
     {
