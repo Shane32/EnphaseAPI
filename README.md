@@ -48,6 +48,59 @@ public class MyService(IEnphaseClient enphaseClient)
 }
 ```
 
+## Configuration
+
+### Options
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `ApiKey` | `string` | `""` | Your Enphase API key |
+| `RetryCount` | `int` | `0` | Number of retry attempts on rate-limit or connectivity errors (0 = no retry) |
+| `RetryDelay` | `TimeSpan` | `TimeSpan.Zero` | Initial delay before each retry |
+| `RetryBackoffMultiplier` | `double` | `1.0` | Multiplier applied to the delay after each successive retry (1.0 = fixed delay, 2.0 = exponential backoff) |
+
+Retries are triggered only by `EnphaseRateLimitException` (HTTP 429) or `HttpRequestException` (transient connectivity problems). All other exceptions are propagated immediately.
+
+### Configuration via `IConfiguration`
+
+Settings can be bound directly from `appsettings.json` or any other configuration source. Pass the desired `IConfiguration` section to `AddEnphaseClient` (the method binds directly to the provided section, giving you full control over the section name):
+
+```csharp
+services.AddEnphaseClient(configuration.GetSection("EnphaseAPI"));
+```
+
+Corresponding `appsettings.json`:
+
+```json
+{
+  "EnphaseAPI": {
+    "ApiKey": "your-api-key",
+    "RetryCount": 3,
+    "RetryDelay": "00:00:01",
+    "RetryBackoffMultiplier": 2.0
+  }
+}
+```
+
+This example retries up to 3 times, with a 1-second delay that doubles after each attempt (1 s → 2 s → 4 s).
+
+## Exceptions
+
+All errors thrown by `IEnphaseClient` derive from `EnphaseException`.
+
+| Exception | HTTP Status | Description |
+|-----------|-------------|-------------|
+| `EnphaseException` | any | Base class; exposes `HttpStatusCode` and `Details` |
+| `EnphaseBadRequestException` | 400 | Invalid request |
+| `EnphaseAuthenticationException` | 401 | Missing or invalid access token |
+| `EnphaseForbiddenException` | 403 | Access denied |
+| `EnphaseNotFoundException` | 404 | Resource not found |
+| `EnphaseMethodNotAllowedException` | 405 | HTTP method not allowed |
+| `EnphaseUnprocessableException` | 422 | Unprocessable entity |
+| `EnphaseRateLimitException` | 429 | Rate limit exceeded; also exposes `Period`, `PeriodStart`, `PeriodEnd`, and `Limit` |
+| `EnphaseServerException` | 500 | Enphase server error |
+| `EnphaseNotImplementedException` | 501 | Endpoint not implemented |
+
 ## API Reference
 
 ### System Details

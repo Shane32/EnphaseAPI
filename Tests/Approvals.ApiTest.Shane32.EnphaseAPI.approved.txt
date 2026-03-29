@@ -10,7 +10,7 @@ namespace Shane32.EnphaseAPI
     }
     public class EnphaseClient : Shane32.EnphaseAPI.IEnphaseClient
     {
-        public EnphaseClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Options.IOptions<Shane32.EnphaseAPI.EnphaseClientOptions> options) { }
+        public EnphaseClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Options.IOptions<Shane32.EnphaseAPI.EnphaseClientOptions> options, System.TimeProvider timeProvider) { }
         public string AccessToken { get; set; }
         protected virtual System.Threading.Tasks.Task<TResponse> GetAsync<TResponse>(string url) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
@@ -66,6 +66,9 @@ namespace Shane32.EnphaseAPI
     {
         public EnphaseClientOptions() { }
         public string ApiKey { get; set; }
+        public double RetryBackoffMultiplier { get; set; }
+        public int RetryCount { get; set; }
+        public System.TimeSpan RetryDelay { get; set; }
     }
     public class EnphaseException : System.Exception
     {
@@ -157,6 +160,7 @@ namespace Shane32.EnphaseAPI
     }
     public static class ServiceCollectionExtensions
     {
+        public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddEnphaseClient(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration) { }
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddEnphaseClient(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Action<Shane32.EnphaseAPI.EnphaseClientOptions>? configure = null) { }
     }
 }

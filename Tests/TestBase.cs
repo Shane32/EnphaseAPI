@@ -16,7 +16,7 @@ public abstract class TestBase
     private const string TEST_ACCESS_TOKEN = "test-token";
     private const string TEST_API_KEY = "test-api-key";
 
-    protected TestBase()
+    protected TestBase(TimeProvider? timeProvider = null)
     {
         var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
         handlerMock
@@ -36,7 +36,7 @@ public abstract class TestBase
             BaseAddress = new Uri("https://api.enphaseenergy.com")
         };
         var options = Options.Create(new EnphaseClientOptions { ApiKey = TEST_API_KEY });
-        Client = new EnphaseClient(httpClient, options);
+        Client = new EnphaseClient(httpClient, options, timeProvider ?? TimeProvider.System);
         Client.AccessToken = TEST_ACCESS_TOKEN;
     }
 
