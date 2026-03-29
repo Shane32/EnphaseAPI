@@ -6,7 +6,7 @@ namespace Tests.Config;
 public class ConfigTests : TestBase
 {
     [Fact]
-    public async Task GetBatterySettings()
+    public async Task GetBatterySettingsAsync()
     {
         SetupJsonResponse(@"{""system_id"":1765,""battery_mode"":""Self - Consumption"",""reserve_soc"":95,""energy_independence"":""enabled"",""charge_from_grid"":""disabled"",""battery_shutdown_level"":13}");
         var result = await Client.GetBatterySettingsAsync(1765);
@@ -17,7 +17,7 @@ public class ConfigTests : TestBase
     }
 
     [Fact]
-    public async Task UpdateBatterySettings()
+    public async Task UpdateBatterySettingsAsync()
     {
         SetupJsonResponse(@"{""system_id"":1765,""battery_mode"":""self-consumption"",""reserve_soc"":80,""energy_independence"":""enabled"",""charge_from_grid"":""disabled"",""battery_shutdown_level"":13}");
         var request = new Shane32.EnphaseAPI.Models.UpdateBatterySettingsRequest { BatteryMode = "self-consumption", ReserveSoc = 80 };
@@ -31,7 +31,7 @@ public class ConfigTests : TestBase
     }
 
     [Fact]
-    public async Task GetStormGuard()
+    public async Task GetStormGuardAsync()
     {
         SetupJsonResponse(@"{""system_id"":1765,""storm_guard_status"":""enabled"",""storm_alert"":""false""}");
         var result = await Client.GetStormGuardAsync(1765);
@@ -41,7 +41,7 @@ public class ConfigTests : TestBase
     }
 
     [Fact]
-    public async Task GetGridStatus()
+    public async Task GetGridStatusAsync()
     {
         SetupJsonResponse(@"{""system_id"":1765,""grid_state"":""On Grid"",""last_report_date"":1676029267}");
         var result = await Client.GetGridStatusAsync(1765);
@@ -51,7 +51,7 @@ public class ConfigTests : TestBase
     }
 
     [Fact]
-    public async Task GetLoadControl()
+    public async Task GetLoadControlAsync()
     {
         SetupJsonResponse(@"{""system_id"":1932237,""load_control_data"":[{""name"":""NC1"",""load_name"":""A/C"",""owner_can_override"":true,""mode"":""Basic"",""soc_low"":30,""soc_high"":50,""status"":""enabled"",""essential_start_time"":32400,""essential_end_time"":57600}]}");
         var result = await Client.GetLoadControlAsync(1932237);

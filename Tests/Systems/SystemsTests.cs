@@ -6,7 +6,7 @@ namespace Tests.Systems;
 public class SystemsTests : TestBase
 {
     [Fact]
-    public async Task GetSystems_NoParams()
+    public async Task GetSystems_NoParamsAsync()
     {
         SetupJsonResponse(@"{""total"":28,""current_page"":1,""size"":10,""count"":2,""items"":""systems"",""systems"":[]}");
         var result = await Client.GetSystemsAsync();
@@ -16,7 +16,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystems_WithParams()
+    public async Task GetSystems_WithParamsAsync()
     {
         SetupJsonResponse(@"{""total"":28,""current_page"":2,""size"":5,""count"":5,""items"":""systems"",""systems"":[]}");
         var result = await Client.GetSystemsAsync(page: 2, size: 5, sortBy: "-id");
@@ -25,7 +25,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task SearchSystems()
+    public async Task SearchSystemsAsync()
     {
         SetupJsonResponse(@"{""total"":1,""current_page"":1,""size"":10,""count"":1,""items"":""systems"",""systems"":[]}");
         var request = new SearchSystemsRequest { System = new SearchSystemsFilter { Statuses = new List<string> { "normal" } } };
@@ -35,7 +35,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystem()
+    public async Task GetSystemAsync()
     {
         SetupJsonResponse(@"{""system_id"":72,""name"":""Test"",""status"":""normal""}");
         var result = await Client.GetSystemAsync(72);
@@ -45,7 +45,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystemSummary()
+    public async Task GetSystemSummaryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698910067,""current_power"":0,""energy_lifetime"":0,""energy_today"":0}");
         var result = await Client.GetSystemSummaryAsync(698910067);
@@ -54,7 +54,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystemSummary_WithDate()
+    public async Task GetSystemSummary_WithDateAsync()
     {
         SetupJsonResponse(@"{""system_id"":698910067,""current_power"":0,""energy_lifetime"":0,""energy_today"":0}");
         await Client.GetSystemSummaryAsync(698910067, summaryDate: "2024-01-01");
@@ -62,7 +62,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystemDevices()
+    public async Task GetSystemDevicesAsync()
     {
         SetupJsonResponse(@"{""system_id"":698910067,""total_devices"":11,""items"":""devices"",""devices"":{""micros"":[],""meters"":[],""gateways"":[],""q_relays"":[],""acbs"":[],""encharges"":[],""enpowers"":[],""ev_chargers"":[],""iq_collars"":[]}}");
         var result = await Client.GetSystemDevicesAsync(698910067);
@@ -72,7 +72,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task RetrieveSystemId()
+    public async Task RetrieveSystemIdAsync()
     {
         SetupJsonResponse(@"{""system_id"":123}");
         var result = await Client.RetrieveSystemIdAsync("SN123456");
@@ -81,7 +81,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystemEvents()
+    public async Task GetSystemEventsAsync()
     {
         SetupJsonResponse(@"{""events"":[],""system_id"":701644354}");
         var result = await Client.GetSystemEventsAsync(701644354, 1740213328);
@@ -90,7 +90,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetSystemAlarms()
+    public async Task GetSystemAlarmsAsync()
     {
         SetupJsonResponse(@"{""alarms"":[],""system_id"":701644354}");
         var result = await Client.GetSystemAlarmsAsync(701644354, 1740213328);
@@ -99,7 +99,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetEventTypes()
+    public async Task GetEventTypesAsync()
     {
         SetupJsonResponse(@"{""event_types"":[{""event_type_id"":28,""event_type_key"":""envoy_no_report"",""stateful"":true,""event_name"":""Gateway not reporting"",""event_description"":""desc"",""recommended_action"":""action""}]}");
         var result = await Client.GetEventTypesAsync();
@@ -110,7 +110,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetOpenEvents()
+    public async Task GetOpenEventsAsync()
     {
         SetupJsonResponse(@"{""events"":[],""system_id"":701644354}");
         var result = await Client.GetOpenEventsAsync(701644354);
@@ -119,7 +119,7 @@ public class SystemsTests : TestBase
     }
 
     [Fact]
-    public async Task GetInvertersSummary()
+    public async Task GetInvertersSummaryAsync()
     {
         SetupJsonResponse(@"[{""signal_strength"":5,""micro_inverters"":[]}]");
         var result = await Client.GetInvertersSummaryAsync(siteId: 12345);

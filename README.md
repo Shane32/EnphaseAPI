@@ -1,107 +1,140 @@
-# NuGetTemplate
+# Shane32.EnphaseAPI
 
-A template repository for creating NuGet packages with GitHub Actions CI/CD, SourceLink support, and best-practice MSBuild configuration.
+A .NET client library for the [Enphase Monitoring API v4](https://developer-v4.enphase.com/), providing a strongly-typed, async-first interface with full dependency injection support.
 
-## 🚀 Getting Started
+## Installation
 
-Follow these steps after creating a new repository from this template:
-
-### 1. Create a new repository from this template
-
-1. On GitHub, click the **Use this template** button at the top of this repository, then select **Create a new repository**.
-2. Fill in the repository name, description, and visibility settings, then click **Create repository**.
-3. Clone your new repository locally
-
-### 2. Rename the solution and project files
-
-Rename `NuGetTemplate.slnx` and `Project/Project.csproj` to match your package name, and update the solution file to reference the renamed project. For example, for a package named `MyCompany.MyLibrary`:
-
-- `NuGetTemplate.slnx` → `MyCompany.MyLibrary.slnx`
-- `Project/Project.csproj` → `Project/MyCompany.MyLibrary.csproj`
-
-The `.csproj` filename determines the default NuGet package ID, so it must match the desired package name. Also update the `ProjectReference` in `Tests/Tests.csproj` to point to the renamed file.
-
-### 3. Update `Directory.Build.props`
-
-Edit [`Directory.Build.props`](Directory.Build.props) to set your package metadata:
-
-```xml
-<Copyright>Your Name</Copyright>
-<Authors>Your Name</Authors>
-<!-- Optional: add a logo image to the repo root and reference it here -->
-<!-- <PackageIcon>logo.png</PackageIcon> -->
+```
+dotnet add package Shane32.EnphaseAPI
 ```
 
-### 4. Update `LICENSE.txt`
+## Authentication
 
-Update [`LICENSE.txt`](LICENSE.txt) with your name and the current year. If you change the license type, also update the `PackageLicenseExpression` property in [`Directory.Build.props`](Directory.Build.props) to match (e.g. `MIT`, `Apache-2.0`). See [SPDX license identifiers](https://spdx.org/licenses/) for valid values.
+All Enphase API requests require **OAuth 2.0** authentication. You must supply:
 
-### 5. Configure GitHub Actions secrets
+- An **OAuth 2.0 access token** obtained through the Enphase OAuth flow
+- Your application's **API key** (obtained from the [Enphase Developer Portal](https://developer-v4.enphase.com/))
 
-The publish workflow will automatically push preview packages to **GitHub Packages** on every push to `master`. No secrets are required for this to work, but the repository must have **GitHub Packages** enabled (it is by default).
+To obtain an access token:
 
-To also publish release packages to **NuGet.org**, add a repository secret named `NUGET_AUTH_TOKEN` containing your NuGet API key:
+1. Register your application at [developer-v4.enphase.com](https://developer-v4.enphase.com/) to get a client ID and client secret.
+2. Direct the user to the Enphase authorization URL to grant consent.
+3. Exchange the returned authorization code for an access token and refresh token via the token endpoint.
+4. Use the access token in the `AccessToken` property of `IEnphaseClient` for each API call. Refresh the token as needed using the refresh token.
 
-1. Go to [NuGet.org](https://www.nuget.org/) → Account → API Keys and create a key scoped to your package.
-2. In your GitHub repository, go to **Settings → Secrets and variables → Actions → New repository secret**.
-3. Name it `NUGET_AUTH_TOKEN` and paste your NuGet API key as the value.
+Each `IEnphaseClient` instance carries a single `AccessToken`, making it straightforward to manage tokens for multiple end users by creating separate client instances per user.
 
-### 6. Update this README
+## Setup
 
-Replace this file with documentation for your package.
+Register the client in your dependency injection container:
 
-## ⚙️ CI/CD Workflows
+```csharp
+services.AddEnphaseClient(options =>
+{
+    options.ApiKey = "your-api-key";
+});
+```
 
-This template includes two pre-configured GitHub Actions workflows. Both delegate to reusable workflows from [Shane32/SharedWorkflows](https://github.com/Shane32/SharedWorkflows) — see that repository for full implementation details.
+Then inject `IEnphaseClient` where needed, set the `AccessToken` for the active user, and call API methods:
 
-### PR Tests (`.github/workflows/test.yml`)
+```csharp
+public class MyService(IEnphaseClient enphaseClient)
+{
+    public async Task<GetSystemsResponse> GetSystemsAsync(string userAccessToken)
+    {
+        enphaseClient.AccessToken = userAccessToken;
+        return await enphaseClient.GetSystemsAsync();
+    }
+}
+```
 
-Triggered on every **pull request**. Runs the following checks:
+## API Reference
 
-- **Format check** – verifies that all code is correctly formatted (via `dotnet format --verify-no-changes`).
-- **Build check** – ensures the project builds without errors or warnings.
-- **Tests** – runs the full test suite.
+### System Details
 
-Concurrent runs for the same PR are automatically cancelled when a new commit is pushed.
+| Method | Description |
+|--------|-------------|
+| `GetSystemsAsync` | Fetch a paginated list of systems |
+| `SearchSystemsAsync` | Search and filter systems |
+| `GetSystemAsync` | Retrieve a system by ID |
+| `GetSystemSummaryAsync` | Retrieve system summary |
+| `GetSystemDevicesAsync` | Retrieve devices for a system |
+| `RetrieveSystemIdAsync` | Retrieve a system ID by Envoy serial number |
+| `GetSystemEventsAsync` | Retrieve events for a site |
+| `GetSystemAlarmsAsync` | Retrieve alarms for a site |
+| `GetEventTypesAsync` | Retrieve event type definitions |
+| `GetOpenEventsAsync` | Retrieve all open events for a site |
+| `GetInvertersSummaryAsync` | Microinverter summary by Envoy or site |
 
-### Build and Publish (`.github/workflows/publish.yml`)
+### Site Level Production Monitoring
 
-Triggered on two events:
+| Method | Description |
+|--------|-------------|
+| `GetProductionMeterReadingsAsync` | Last known production meter readings |
+| `GetRgmStatsAsync` | Revenue-grade meter statistics |
+| `GetEnergyLifetimeAsync` | Daily lifetime energy production time series |
+| `GetProductionMicroTelemetryAsync` | Telemetry for all production micros |
+| `GetProductionMeterTelemetryAsync` | Telemetry for all production meters |
 
-#### Push to `master` — preview packages
+### Site Level Consumption Monitoring
 
-Every push to `master` produces a pre-release NuGet package and publishes it to **GitHub Packages**. The version is derived from the `VersionPrefix` property in [`Directory.Build.props`](Directory.Build.props) combined with the GitHub Actions run number. For example, with the default prefix of `1.0.0-preview`, the published version would be `1.0.0-preview-123` (where `123` is the run number).
+| Method | Description |
+|--------|-------------|
+| `GetConsumptionMeterReadingsAsync` | Last known consumption meter readings |
+| `GetStorageMeterReadingsAsync` | Last known storage meter readings |
+| `GetConsumptionLifetimeAsync` | Daily lifetime consumption time series |
+| `GetBatteryLifetimeAsync` | Daily battery charge/discharge time series |
+| `GetEnergyImportLifetimeAsync` | Daily lifetime grid import time series |
+| `GetEnergyExportLifetimeAsync` | Daily lifetime grid export time series |
+| `GetBatteryTelemetryAsync` | Battery telemetry intervals |
+| `GetConsumptionMeterTelemetryAsync` | Consumption meter telemetry intervals |
+| `GetEnergyImportTelemetryAsync` | Grid import telemetry intervals |
+| `GetEnergyExportTelemetryAsync` | Grid export telemetry intervals |
+| `GetLatestTelemetryAsync` | Latest real-time power readings |
 
-To consume preview packages from GitHub Packages, add the feed to your NuGet configuration and authenticate with a personal access token.
+### Device Level Monitoring
 
-#### GitHub Release — stable (or pre-release) packages
+| Method | Description |
+|--------|-------------|
+| `GetMicroTelemetryAsync` | Telemetry for a single microinverter |
+| `GetEnchargeTelemetryAsync` | Telemetry for a single Encharge battery |
+| `GetEvseLifetimeAsync` | Daily EVSE charger time series |
+| `GetEvseTelemtryAsync` | EVSE charger telemetry intervals |
+| `GetHpLifetimeAsync` | Daily heat pump time series |
+| `GetHpTelemetryAsync` | Heat pump telemetry intervals |
 
-When you **publish a GitHub Release**, the workflow publishes a NuGet package using the release's **tag name** as the exact version. The tag name must be a valid NuGet version string — for example, `1.5.0` for a stable release or `1.5.0-beta.1` for a pre-release.
+### System Configurations
 
-Steps to publish a release:
+| Method | Description |
+|--------|-------------|
+| `GetBatterySettingsAsync` | Get current battery settings |
+| `UpdateBatterySettingsAsync` | Update battery settings |
+| `GetStormGuardAsync` | Get storm guard settings |
+| `GetGridStatusAsync` | Get current grid status |
+| `GetLoadControlAsync` | Get load control settings |
 
-1. Decide on the version number (e.g. `1.5.0`).
-2. In your GitHub repository, go to **Releases → Draft a new release**.
-3. Set the **tag** to the exact version string (e.g. `1.5.0`). Create the tag on `master` (or the appropriate commit).
-4. Fill in the release title and notes, then click **Publish release**.
-5. The workflow will build and pack the project, then:
-   - Push to **NuGet.org** if the `NUGET_AUTH_TOKEN` secret is configured.
-   - Push to **GitHub Packages** if `NUGET_AUTH_TOKEN` is not configured.
+### EV Charger Monitoring
 
-## 📝 Template Notes
+| Method | Description |
+|--------|-------------|
+| `GetEvChargerDevicesAsync` | Fetch active EV chargers |
+| `GetEvChargerEventsAsync` | Fetch EV charger events |
+| `GetEvChargerSessionsAsync` | Charger session history |
+| `GetEvChargerSchedulesAsync` | Get charger schedules |
+| `GetEvChargerLifetimeAsync` | Daily EV charger energy time series |
+| `GetEvChargerTelemetryAsync` | EV charger telemetry intervals |
 
-- **`IsPackable`** defaults to `false` for all projects. The main `Project/` project has it set to `true`. When adding a second project that should produce a NuGet package, add `<IsPackable>true</IsPackable>` to that project file. Test projects and other non-package projects should leave it as `false` (the default).
+### EV Charger Control
 
-- **SourceLink** is automatically configured for all packable projects via `Microsoft.SourceLink.GitHub`. Ensure the repository is hosted on GitHub for this to work correctly.
+| Method | Description |
+|--------|-------------|
+| `StartChargingAsync` | Send a start charging command |
+| `StopChargingAsync` | Send a stop charging command |
 
-- **`LICENSE.txt`**, **`README.md`**, and the logo image (when `PackageIcon` is set in `Directory.Build.props`) from the repository root are automatically included in all NuGet packages produced by packable projects.
+## License
 
-- **`ContinuousIntegrationBuild`** is enabled automatically when running in GitHub Actions, which ensures deterministic builds and correct SourceLink paths.
+This library is licensed under the [MIT License](LICENSE.txt).
 
-## 📄 License
-
-This template is licensed under the [MIT License](LICENSE.txt).
-
-## 🙏 Credits
+## Credits
 
 Glory to Jehovah, Lord of Lords and King of Kings, creator of Heaven and Earth, who through his Son Jesus Christ, has redeemed me to become a child of God. -[Shane32](https://github.com/Shane32)

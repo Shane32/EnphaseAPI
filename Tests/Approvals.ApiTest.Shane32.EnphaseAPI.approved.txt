@@ -33,7 +33,7 @@ namespace Shane32.EnphaseAPI
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemtryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null) { }
@@ -128,7 +128,7 @@ namespace Shane32.EnphaseAPI
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemtryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null);

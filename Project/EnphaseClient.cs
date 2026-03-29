@@ -18,8 +18,7 @@ public class EnphaseClient : IEnphaseClient
 
     public string AccessToken { get; set; } = string.Empty;
 
-    private static readonly JsonSerializerOptions _jsonOptions = new()
-    {
+    private static readonly JsonSerializerOptions _jsonOptions = new() {
         PropertyNameCaseInsensitive = true,
     };
 
@@ -43,8 +42,7 @@ public class EnphaseClient : IEnphaseClient
         using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
         request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
-        if (body != null)
-        {
+        if (body != null) {
             request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
         }
         using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
@@ -56,8 +54,7 @@ public class EnphaseClient : IEnphaseClient
         using var request = new HttpRequestMessage(HttpMethod.Put, url);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
         request.Headers.TryAddWithoutValidation("key", _options.ApiKey);
-        if (body != null)
-        {
+        if (body != null) {
             request.Content = new StringContent(JsonSerializer.Serialize(body, _jsonOptions), Encoding.UTF8, "application/json");
         }
         using var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
@@ -67,8 +64,7 @@ public class EnphaseClient : IEnphaseClient
     private static async Task<TResponse> ProcessResponseAsync<TResponse>(HttpResponseMessage response)
     {
         var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        if (response.IsSuccessStatusCode)
-        {
+        if (response.IsSuccessStatusCode) {
             return JsonSerializer.Deserialize<TResponse>(content, _jsonOptions)!;
         }
         throw CreateException(response.StatusCode, content);
@@ -83,21 +79,18 @@ public class EnphaseClient : IEnphaseClient
         long? periodEnd = null;
         int? limit = null;
 
-        try
-        {
+        try {
             using var doc = JsonDocument.Parse(content);
             var root = doc.RootElement;
 
-            if (root.TryGetProperty("message", out var msgEl))
-            {
+            if (root.TryGetProperty("message", out var msgEl)) {
                 if (msgEl.ValueKind == JsonValueKind.String)
                     message = msgEl.GetString();
                 else if (msgEl.ValueKind == JsonValueKind.Array && msgEl.GetArrayLength() > 0)
                     message = msgEl[0].GetString();
             }
 
-            if (root.TryGetProperty("details", out var detEl))
-            {
+            if (root.TryGetProperty("details", out var detEl)) {
                 if (detEl.ValueKind == JsonValueKind.String)
                     details = detEl.GetString();
                 else if (detEl.ValueKind == JsonValueKind.Array && detEl.GetArrayLength() > 0)
@@ -115,14 +108,11 @@ public class EnphaseClient : IEnphaseClient
                 periodEnd = peEl.GetInt64();
             if (root.TryGetProperty("limit", out var limEl) && limEl.ValueKind == JsonValueKind.Number)
                 limit = limEl.GetInt32();
-        }
-        catch (JsonException)
-        {
+        } catch (JsonException) {
             message = content;
         }
 
-        return (int)statusCode switch
-        {
+        return (int)statusCode switch {
             400 => new EnphaseBadRequestException(message, details),
             401 => new EnphaseAuthenticationException(message, details),
             403 => new EnphaseForbiddenException(message, details),
@@ -294,7 +284,7 @@ public class EnphaseClient : IEnphaseClient
             ("start_date", startDate),
             ("end_date", endDate)));
 
-    public Task<GetEvseTelemetryResponse> GetEvseTelemtryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null, string? intervalDuration = null)
+    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null, string? intervalDuration = null)
         => GetAsync<GetEvseTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/{serialNo}/evse_telemetry",
             ("start_at", startAt?.ToString()),
             ("granularity", granularity),

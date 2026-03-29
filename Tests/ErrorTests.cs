@@ -7,7 +7,7 @@ namespace Tests;
 public class ErrorTests : TestBase
 {
     [Fact]
-    public async Task Returns_401_AuthenticationException()
+    public async Task Returns_401_AuthenticationExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Not Authorized"",""details"":""User is not authorized"",""code"":401}", HttpStatusCode.Unauthorized);
         var ex = await Should.ThrowAsync<EnphaseAuthenticationException>(() => Client.GetSystemsAsync());
@@ -17,7 +17,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_403_ForbiddenException()
+    public async Task Returns_403_ForbiddenExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Forbidden"",""details"":""Not authorized"",""code"":403}", HttpStatusCode.Forbidden);
         var ex = await Should.ThrowAsync<EnphaseForbiddenException>(() => Client.GetSystemsAsync());
@@ -26,7 +26,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_404_NotFoundException()
+    public async Task Returns_404_NotFoundExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Not Found"",""details"":""System not found"",""code"":404}", HttpStatusCode.NotFound);
         var ex = await Should.ThrowAsync<EnphaseNotFoundException>(() => Client.GetSystemAsync(999));
@@ -35,7 +35,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_405_MethodNotAllowedException()
+    public async Task Returns_405_MethodNotAllowedExceptionAsync()
     {
         SetupJsonResponse(@"{""reason"":""405"",""message"":[""Method not allowed""]}", HttpStatusCode.MethodNotAllowed);
         var ex = await Should.ThrowAsync<EnphaseMethodNotAllowedException>(() => Client.GetSystemsAsync());
@@ -44,7 +44,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_422_UnprocessableException()
+    public async Task Returns_422_UnprocessableExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Unprocessable Entity"",""details"":""Invalid request"",""code"":422}", HttpStatusCode.UnprocessableEntity);
         var ex = await Should.ThrowAsync<EnphaseUnprocessableException>(() => Client.GetSystemsAsync());
@@ -53,7 +53,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_429_RateLimitException()
+    public async Task Returns_429_RateLimitExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Too Many Requests"",""details"":""Usage limit exceeded for plan Kilowatt"",""code"":429,""period"":""minute"",""period_start"":1623825660,""period_end"":1623825720,""limit"":5}", HttpStatusCode.TooManyRequests);
         var ex = await Should.ThrowAsync<EnphaseRateLimitException>(() => Client.GetSystemsAsync());
@@ -67,7 +67,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_500_ServerException()
+    public async Task Returns_500_ServerExceptionAsync()
     {
         SetupJsonResponse(@"{""message"":""Internal Server Error"",""details"":""unable to fetch data"",""code"":500}", HttpStatusCode.InternalServerError);
         var ex = await Should.ThrowAsync<EnphaseServerException>(() => Client.GetSystemsAsync());
@@ -75,7 +75,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_500_RgmFormat()
+    public async Task Returns_500_RgmFormatAsync()
     {
         SetupJsonResponse(@"{""errorCode"":7,""errorMessages"":[""Data is temporarily unavailable""]}", HttpStatusCode.InternalServerError);
         var ex = await Should.ThrowAsync<EnphaseServerException>(() => Client.GetRgmStatsAsync(123));
@@ -84,7 +84,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_400_BadRequestException_EvChargerStyle()
+    public async Task Returns_400_BadRequestException_EvChargerStyleAsync()
     {
         SetupJsonResponse(@"{""message"":""Bad request"",""code"":""400"",""details"":""Invalid system_id""}", HttpStatusCode.BadRequest);
         var ex = await Should.ThrowAsync<EnphaseBadRequestException>(() => Client.GetEvChargerDevicesAsync(0));
@@ -94,7 +94,7 @@ public class ErrorTests : TestBase
     }
 
     [Fact]
-    public async Task Returns_501_NotImplementedException()
+    public async Task Returns_501_NotImplementedExceptionAsync()
     {
         SetupJsonResponse(@"{""reason"":""501"",""message"":[""Not Implemented""]}", HttpStatusCode.NotImplemented);
         var ex = await Should.ThrowAsync<EnphaseNotImplementedException>(() => Client.GetSystemsAsync());

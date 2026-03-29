@@ -5,7 +5,7 @@ namespace Tests.Consumption;
 public class ConsumptionTests : TestBase
 {
     [Fact]
-    public async Task GetConsumptionMeterReadings()
+    public async Task GetConsumptionMeterReadingsAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""meter_readings"":[],""meta"":{""status"":""normal""}}");
         var result = await Client.GetConsumptionMeterReadingsAsync(66);
@@ -14,7 +14,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetStorageMeterReadings()
+    public async Task GetStorageMeterReadingsAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""meter_readings"":[],""meta"":{""status"":""normal""}}");
         var result = await Client.GetStorageMeterReadingsAsync(66);
@@ -23,7 +23,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetConsumptionLifetime()
+    public async Task GetConsumptionLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""start_date"":""2016-08-01"",""consumption"":[15422,15421]}");
         var result = await Client.GetConsumptionLifetimeAsync(66);
@@ -33,7 +33,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetBatteryLifetime()
+    public async Task GetBatteryLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""start_date"":""2016-08-01"",""charge"":[15422],""discharge"":[0]}");
         var result = await Client.GetBatteryLifetimeAsync(66);
@@ -43,7 +43,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetEnergyImportLifetime()
+    public async Task GetEnergyImportLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""start_date"":""2016-08-01"",""import"":[100,200]}");
         var result = await Client.GetEnergyImportLifetimeAsync(66);
@@ -52,7 +52,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetEnergyExportLifetime()
+    public async Task GetEnergyExportLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""start_date"":""2016-08-01"",""export"":[50,100]}");
         var result = await Client.GetEnergyExportLifetimeAsync(66);
@@ -61,7 +61,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetBatteryTelemetry()
+    public async Task GetBatteryTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":9,""start_at"":1496526300,""end_at"":1496529300,""items"":""intervals"",""intervals"":[{""end_at"":1384122700,""charge"":{""enwh"":40,""devices_reporting"":1},""discharge"":{""enwh"":0,""devices_reporting"":4},""soc"":{""percent"":25,""devices_reporting"":4}}],""last_reported_aggregate_soc"":""97%""}");
         var result = await Client.GetBatteryTelemetryAsync(698905955);
@@ -73,7 +73,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetConsumptionMeterTelemetry()
+    public async Task GetConsumptionMeterTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":1,""start_at"":1496526300,""end_at"":1496529300,""items"":""intervals"",""intervals"":[]}");
         var result = await Client.GetConsumptionMeterTelemetryAsync(698905955);
@@ -82,7 +82,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetEnergyImportTelemetry()
+    public async Task GetEnergyImportTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":0,""start_at"":1496526300,""end_at"":1496528300,""items"":""intervals"",""intervals"":[[{""end_at"":1384122700,""wh_imported"":40}]]}");
         var result = await Client.GetEnergyImportTelemetryAsync(698905955);
@@ -93,7 +93,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetEnergyExportTelemetry()
+    public async Task GetEnergyExportTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":0,""start_at"":1496526300,""end_at"":1496528300,""items"":""intervals"",""intervals"":[[{""end_at"":1384122700,""wh_exported"":40}]]}");
         var result = await Client.GetEnergyExportTelemetryAsync(698905955);
@@ -104,7 +104,7 @@ public class ConsumptionTests : TestBase
     }
 
     [Fact]
-    public async Task GetLatestTelemetry()
+    public async Task GetLatestTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698943141,""items"":""devices"",""devices"":{""meters"":[{""id"":1084690247,""name"":""production"",""channel"":1,""last_report_at"":1701418500,""power"":755}],""encharges"":[],""heat-pump"":[],""evse"":[]}}");
         var result = await Client.GetLatestTelemetryAsync(698943141);

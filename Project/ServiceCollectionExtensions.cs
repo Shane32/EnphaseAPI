@@ -13,9 +13,6 @@ public static class ServiceCollectionExtensions
         else
             services.Configure<EnphaseClientOptions>(_ => { });
 
-        return services.AddHttpClient<IEnphaseClient, EnphaseClient>(client =>
-        {
-            client.BaseAddress = new Uri("https://api.enphaseenergy.com");
-        });
+        return services.AddHttpClient<IEnphaseClient, EnphaseClient>(client => client.BaseAddress = new Uri("https://api.enphaseenergy.com"));
     }
 }

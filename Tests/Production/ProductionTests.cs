@@ -5,7 +5,7 @@ namespace Tests.Production;
 public class ProductionTests : TestBase
 {
     [Fact]
-    public async Task GetProductionMeterReadings()
+    public async Task GetProductionMeterReadingsAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""meter_readings"":[{""serial_number"":""123"",""value"":6180635,""read_at"":1473901200}],""meta"":{""status"":""normal""}}");
         var result = await Client.GetProductionMeterReadingsAsync(66);
@@ -15,7 +15,7 @@ public class ProductionTests : TestBase
     }
 
     [Fact]
-    public async Task GetRgmStats()
+    public async Task GetRgmStatsAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""total_devices"":2,""intervals"":[],""meter_intervals"":[]}");
         var result = await Client.GetRgmStatsAsync(66);
@@ -24,7 +24,7 @@ public class ProductionTests : TestBase
     }
 
     [Fact]
-    public async Task GetEnergyLifetime()
+    public async Task GetEnergyLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":66,""start_date"":""2013-01-01"",""production"":[15422,15421]}");
         var result = await Client.GetEnergyLifetimeAsync(66);
@@ -34,7 +34,7 @@ public class ProductionTests : TestBase
     }
 
     [Fact]
-    public async Task GetProductionMicroTelemetry()
+    public async Task GetProductionMicroTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":9,""start_at"":1496526300,""end_at"":1496528300,""items"":""intervals"",""intervals"":[]}");
         var result = await Client.GetProductionMicroTelemetryAsync(698905955);
@@ -43,7 +43,7 @@ public class ProductionTests : TestBase
     }
 
     [Fact]
-    public async Task GetProductionMeterTelemetry()
+    public async Task GetProductionMeterTelemetryAsync()
     {
         SetupJsonResponse(@"{""system_id"":698905955,""granularity"":""day"",""total_devices"":9,""start_at"":1496526300,""end_at"":1496529300,""items"":""intervals"",""intervals"":[]}");
         var result = await Client.GetProductionMeterTelemetryAsync(698905955);
