@@ -1,7 +1,1373 @@
 namespace Shane32.EnphaseAPI
 {
-    public class Class1
+    public class EnphaseAuthenticationException : Shane32.EnphaseAPI.EnphaseException
     {
-        public Class1() { }
+        public EnphaseAuthenticationException(string? message, string? details) { }
+    }
+    public class EnphaseBadRequestException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseBadRequestException(string? message, string? details) { }
+    }
+    public class EnphaseClient : Shane32.EnphaseAPI.IEnphaseClient
+    {
+        public EnphaseClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Options.IOptions<Shane32.EnphaseAPI.EnphaseClientOptions> options) { }
+        public string AccessToken { get; set; }
+        protected virtual System.Threading.Tasks.Task<TResponse> GetAsync<TResponse>(string url) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = default, long? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = default, bool? cleared = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemInfo> GetSystemAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemDevices> GetSystemDevicesAsync(int systemId) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> GetSystemsAsync(int? page = default, int? size = default, string? sortBy = null) { }
+        protected virtual System.Threading.Tasks.Task<TResponse> PostAsync<TResponse>(string url, object? body = null) { }
+        protected virtual System.Threading.Tasks.Task<TResponse> PutAsync<TResponse>(string url, object? body = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.RetrieveSystemIdResponse> RetrieveSystemIdAsync(string serialNum) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> SearchSystemsAsync(Shane32.EnphaseAPI.Models.SearchSystemsRequest request, int? page = default, int? size = default, bool? liveStream = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.ChargingCommandResponse> StartChargingAsync(int systemId, string serialNo, Shane32.EnphaseAPI.Models.StartChargingRequest request) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.ChargingCommandResponse> StopChargingAsync(int systemId, string serialNo) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> UpdateBatterySettingsAsync(int systemId, Shane32.EnphaseAPI.Models.UpdateBatterySettingsRequest request) { }
+    }
+    public class EnphaseClientOptions
+    {
+        public EnphaseClientOptions() { }
+        public string ApiKey { get; set; }
+    }
+    public class EnphaseException : System.Exception
+    {
+        public EnphaseException(int httpStatusCode, string? message, string? details) { }
+        public string? Details { get; }
+        public int HttpStatusCode { get; }
+    }
+    public class EnphaseForbiddenException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseForbiddenException(string? message, string? details) { }
+    }
+    public class EnphaseMethodNotAllowedException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseMethodNotAllowedException(string? message, string? details) { }
+    }
+    public class EnphaseNotFoundException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseNotFoundException(string? message, string? details) { }
+    }
+    public class EnphaseNotImplementedException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseNotImplementedException(string? message, string? details) { }
+    }
+    public class EnphaseRateLimitException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseRateLimitException(string? message, string? details, string? period, long? periodStart, long? periodEnd, int? limit) { }
+        public int? Limit { get; }
+        public string? Period { get; }
+        public long? PeriodEnd { get; }
+        public long? PeriodStart { get; }
+    }
+    public class EnphaseServerException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseServerException(string? message, string? details) { }
+    }
+    public class EnphaseUnprocessableException : Shane32.EnphaseAPI.EnphaseException
+    {
+        public EnphaseUnprocessableException(string? message, string? details) { }
+    }
+    public interface IEnphaseClient
+    {
+        string AccessToken { get; set; }
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = default, long? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = default, bool? cleared = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemInfo> GetSystemAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemDevices> GetSystemDevicesAsync(int systemId);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> GetSystemsAsync(int? page = default, int? size = default, string? sortBy = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.RetrieveSystemIdResponse> RetrieveSystemIdAsync(string serialNum);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> SearchSystemsAsync(Shane32.EnphaseAPI.Models.SearchSystemsRequest request, int? page = default, int? size = default, bool? liveStream = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.ChargingCommandResponse> StartChargingAsync(int systemId, string serialNo, Shane32.EnphaseAPI.Models.StartChargingRequest request);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.ChargingCommandResponse> StopChargingAsync(int systemId, string serialNo);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> UpdateBatterySettingsAsync(int systemId, Shane32.EnphaseAPI.Models.UpdateBatterySettingsRequest request);
+    }
+    public static class ServiceCollectionExtensions
+    {
+        public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddEnphaseClient(this Microsoft.Extensions.DependencyInjection.IServiceCollection services, System.Action<Shane32.EnphaseAPI.EnphaseClientOptions>? configure = null) { }
+    }
+}
+namespace Shane32.EnphaseAPI.Models
+{
+    public class AlarmEvent
+    {
+        public AlarmEvent() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_date")]
+        public long? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public long? StartDate { get; set; }
+    }
+    public class BatteryEnergyData
+    {
+        public BatteryEnergyData() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("enwh")]
+        public long? Enwh { get; set; }
+    }
+    public class BatterySettings
+    {
+        public BatterySettings() { }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_mode")]
+        public string? BatteryMode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_shutdown_level")]
+        public int? BatteryShutdownLevel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("charge_from_grid")]
+        public string? ChargeFromGrid { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_independence")]
+        public string? EnergyIndependence { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reserve_soc")]
+        public int? ReserveSoc { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class BatterySocData
+    {
+        public BatterySocData() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("percent")]
+        public int? Percent { get; set; }
+    }
+    public class BatteryTelemetryInterval
+    {
+        public BatteryTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charge")]
+        public Shane32.EnphaseAPI.Models.BatteryEnergyData? Charge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("discharge")]
+        public Shane32.EnphaseAPI.Models.BatteryEnergyData? Discharge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("soc")]
+        public Shane32.EnphaseAPI.Models.BatterySocData? Soc { get; set; }
+    }
+    public class CellularModem
+    {
+        public CellularModem() { }
+        [System.Text.Json.Serialization.JsonPropertyName("imei")]
+        public string? Imei { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("part_num")]
+        public string? PartNum { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("plan_end_date")]
+        public long? PlanEndDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("plan_start_date")]
+        public long? PlanStartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sku")]
+        public string? Sku { get; set; }
+    }
+    public class ChargerSchedule
+    {
+        public ChargerSchedule() { }
+        [System.Text.Json.Serialization.JsonPropertyName("is_active")]
+        public bool? IsActive { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reminder_flag")]
+        public bool? ReminderFlag { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reminder_timer")]
+        public int? ReminderTimer { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("schedules")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargerScheduleTimeBlock>? Schedules { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
+        public string? Type { get; set; }
+    }
+    public class ChargerScheduleTimeBlock
+    {
+        public ChargerScheduleTimeBlock() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charging_level")]
+        public int? ChargingLevel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("days")]
+        public System.Collections.Generic.List<int>? Days { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_time")]
+        public string? EndTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_time")]
+        public string? StartTime { get; set; }
+    }
+    public class ChargingCommandResponse
+    {
+        public ChargingCommandResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
+        public string? Message { get; set; }
+    }
+    public class ChargingSession
+    {
+        public ChargingSession() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charge_time")]
+        public long? ChargeTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("cost")]
+        public double? Cost { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("duration")]
+        public long? Duration { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_time")]
+        public long? EndTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_added")]
+        public double? EnergyAdded { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("miles_added")]
+        public double? MilesAdded { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_time")]
+        public long? StartTime { get; set; }
+    }
+    public class ConsumptionMeterInterval
+    {
+        public ConsumptionMeterInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("enwh")]
+        public long? Enwh { get; set; }
+    }
+    public class DeviceCollection
+    {
+        public DeviceCollection() { }
+        [System.Text.Json.Serialization.JsonPropertyName("acbs")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? Acbs { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("encharges")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? Encharges { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("enpowers")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? Enpowers { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("ev_chargers")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerDevice>? EvChargers { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("gateways")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.GatewayDevice>? Gateways { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("iq_collars")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? IqCollars { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meters")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.MeterDevice>? Meters { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("micros")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? Micros { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("q_relays")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.DeviceInfo>? QRelays { get; set; }
+    }
+    public class DeviceInfo
+    {
+        public DeviceInfo() { }
+        [System.Text.Json.Serialization.JsonPropertyName("active")]
+        public System.Text.Json.JsonElement? Active { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public long Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("model")]
+        public string? Model { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("part_number")]
+        public string? PartNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("product_name")]
+        public string? ProductName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sku")]
+        public string? Sku { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class EnchargeEnergyData
+    {
+        public EnchargeEnergyData() { }
+        [System.Text.Json.Serialization.JsonPropertyName("enwh")]
+        public long? Enwh { get; set; }
+    }
+    public class EnchargeInterval
+    {
+        public EnchargeInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charge")]
+        public Shane32.EnphaseAPI.Models.EnchargeEnergyData? Charge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("discharge")]
+        public Shane32.EnphaseAPI.Models.EnchargeEnergyData? Discharge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("soc")]
+        public Shane32.EnphaseAPI.Models.EnchargeSocData? Soc { get; set; }
+    }
+    public class EnchargeSocData
+    {
+        public EnchargeSocData() { }
+        [System.Text.Json.Serialization.JsonPropertyName("percent")]
+        public int? Percent { get; set; }
+    }
+    public class EvChargerDevice : Shane32.EnphaseAPI.Models.DeviceInfo
+    {
+        public EvChargerDevice() { }
+        [System.Text.Json.Serialization.JsonPropertyName("firmware")]
+        public string? Firmware { get; set; }
+    }
+    public class EvChargerDeviceInfo
+    {
+        public EvChargerDeviceInfo() { }
+        [System.Text.Json.Serialization.JsonPropertyName("active")]
+        public bool? Active { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("firmware")]
+        public string? Firmware { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public string? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("model")]
+        public string? Model { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("part_number")]
+        public string? PartNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sku")]
+        public string? Sku { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class EvChargerDevices
+    {
+        public EvChargerDevices() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices")]
+        public Shane32.EnphaseAPI.Models.EvChargerDevicesContainer? Devices { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class EvChargerDevicesContainer
+    {
+        public EvChargerDevicesContainer() { }
+        [System.Text.Json.Serialization.JsonPropertyName("ev_chargers")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerDeviceInfo>? EvChargers { get; set; }
+    }
+    public class EvChargerEvent
+    {
+        public EvChargerEvent() { }
+        [System.Text.Json.Serialization.JsonPropertyName("cleared_date")]
+        public long? ClearedDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("details")]
+        public string? Details { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("triggered_date")]
+        public long? TriggeredDate { get; set; }
+    }
+    public class EvChargerTelemetryInterval
+    {
+        public EvChargerTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public long? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+    }
+    public class EventType
+    {
+        public EventType() { }
+        [System.Text.Json.Serialization.JsonPropertyName("event_description")]
+        public string? EventDescription { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_name")]
+        public string? EventName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_type_id")]
+        public int? EventTypeId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_type_key")]
+        public string? EventTypeKey { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("recommended_action")]
+        public string? RecommendedAction { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("stateful")]
+        public bool? Stateful { get; set; }
+    }
+    public class EvseInterval
+    {
+        public EvseInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_consumed")]
+        public long? WhConsumed { get; set; }
+    }
+    public class ExportTelemetryInterval
+    {
+        public ExportTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_exported")]
+        public long? WhExported { get; set; }
+    }
+    public class GatewayDevice : Shane32.EnphaseAPI.Models.DeviceInfo
+    {
+        public GatewayDevice() { }
+        [System.Text.Json.Serialization.JsonPropertyName("cellular_modem")]
+        public Shane32.EnphaseAPI.Models.CellularModem? CellularModem { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("emu_sw_version")]
+        public string? EmuSwVersion { get; set; }
+    }
+    public class GetBatteryLifetimeResponse
+    {
+        public GetBatteryLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charge")]
+        public System.Collections.Generic.List<long>? Charge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("discharge")]
+        public System.Collections.Generic.List<long>? Discharge { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetBatteryTelemetryResponse
+    {
+        public GetBatteryTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.BatteryTelemetryInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_reported_aggregate_soc")]
+        public string? LastReportedAggregateSoc { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetConsumptionLifetimeResponse
+    {
+        public GetConsumptionLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetConsumptionMeterReadingsResponse
+    {
+        public GetConsumptionMeterReadingsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_readings")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ProductionMeterReading>? MeterReadings { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetConsumptionMeterTelemetryResponse
+    {
+        public GetConsumptionMeterTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ConsumptionMeterInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetEnchargeTelemetryResponse
+    {
+        public GetEnchargeTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EnchargeInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_reported_soc")]
+        public string? LastReportedSoc { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_reported_time")]
+        public long? LastReportedTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetEnergyExportLifetimeResponse
+    {
+        public GetEnergyExportLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("export")]
+        public System.Collections.Generic.List<long>? Export { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEnergyExportTelemetryResponse
+    {
+        public GetEnergyExportTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ExportTelemetryInterval>>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetEnergyImportLifetimeResponse
+    {
+        public GetEnergyImportLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("import")]
+        public System.Collections.Generic.List<long>? Import { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEnergyImportTelemetryResponse
+    {
+        public GetEnergyImportTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ImportTelemetryInterval>>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetEnergyLifetimeResponse
+    {
+        public GetEnergyLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_production")]
+        public System.Collections.Generic.List<long>? MeterProduction { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_start_date")]
+        public string? MeterStartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("micro_production")]
+        public System.Collections.Generic.List<long>? MicroProduction { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("production")]
+        public System.Collections.Generic.List<long>? Production { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvChargerEventsResponse
+    {
+        public GetEvChargerEventsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+        public int? Count { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("events")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerEvent>? Events { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvChargerLifetimeResponse
+    {
+        public GetEvChargerLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvChargerSchedulesResponse
+    {
+        public GetEvChargerSchedulesResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("charger_schedules")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargerSchedule>? ChargerSchedules { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvChargerSessionsResponse
+    {
+        public GetEvChargerSessionsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+        public int? Count { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sessions")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ChargingSession>? Sessions { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvChargerTelemetryResponse
+    {
+        public GetEvChargerTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerTelemetryInterval>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_date")]
+        public string? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEventTypesResponse
+    {
+        public GetEventTypesResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("event_types")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EventType>? EventTypes { get; set; }
+    }
+    public class GetEvseLifetimeResponse
+    {
+        public GetEvseLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_date")]
+        public string? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetEvseTelemetryResponse
+    {
+        public GetEvseTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("interval_duration")]
+        public string? IntervalDuration { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvseInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetHpLifetimeResponse
+    {
+        public GetHpLifetimeResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("consumption")]
+        public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_date")]
+        public string? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_date")]
+        public string? StartDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetHpTelemetryResponse
+    {
+        public GetHpTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("interval_duration")]
+        public string? IntervalDuration { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.HpInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetLatestTelemetryResponse
+    {
+        public GetLatestTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices")]
+        public Shane32.EnphaseAPI.Models.LatestTelemetryDevices? Devices { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetLoadControlResponse
+    {
+        public GetLoadControlResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("load_control_data")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.LoadControlChannel>? LoadControlData { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetMicroTelemetryResponse
+    {
+        public GetMicroTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.MicroInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetOpenEventsResponse
+    {
+        public GetOpenEventsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("events")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.SystemEvent>? Events { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetProductionMeterReadingsResponse
+    {
+        public GetProductionMeterReadingsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_readings")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ProductionMeterReading>? MeterReadings { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetProductionMeterTelemetryResponse
+    {
+        public GetProductionMeterTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.TelemetryProductionMeterInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetProductionMicroTelemetryResponse
+    {
+        public GetProductionMicroTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("granularity")]
+        public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.TelemetryInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("start_at")]
+        public long? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetRgmStatsResponse
+    {
+        public GetRgmStatsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.RgmInterval>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.RgmMeterInterval>? MeterIntervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class GetStorageMeterReadingsResponse
+    {
+        public GetStorageMeterReadingsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("meta")]
+        public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_readings")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.ProductionMeterReading>? MeterReadings { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetSystemAlarmsResponse
+    {
+        public GetSystemAlarmsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("alarms")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.SystemAlarm>? Alarms { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetSystemEventsResponse
+    {
+        public GetSystemEventsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("events")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.SystemEvent>? Events { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class GetSystemsResponse
+    {
+        public GetSystemsResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+        public int Count { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("current_page")]
+        public int CurrentPage { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("size")]
+        public int Size { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("systems")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.SystemInfo>? Systems { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total")]
+        public int Total { get; set; }
+    }
+    public class GridStatus
+    {
+        public GridStatus() { }
+        [System.Text.Json.Serialization.JsonPropertyName("grid_state")]
+        public string? GridState { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_date")]
+        public long? LastReportDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class HpInterval
+    {
+        public HpInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_consumed")]
+        public long? WhConsumed { get; set; }
+    }
+    public class ImportTelemetryInterval
+    {
+        public ImportTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_imported")]
+        public long? WhImported { get; set; }
+    }
+    public class InvertersSummaryItem
+    {
+        public InvertersSummaryItem() { }
+        [System.Text.Json.Serialization.JsonPropertyName("micro_inverters")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.MicroInverterInfo>? MicroInverters { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("signal_strength")]
+        public int? SignalStrength { get; set; }
+    }
+    public class LatestTelemetryDevices
+    {
+        public LatestTelemetryDevices() { }
+        [System.Text.Json.Serialization.JsonPropertyName("encharges")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.LatestTelemetryEncharge>? Encharges { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("evse")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.LatestTelemetryEvse>? Evse { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("heat-pump")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.LatestTelemetryHeatPump>? HeatPump { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meters")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.LatestTelemetryMeter>? Meters { get; set; }
+    }
+    public class LatestTelemetryEncharge
+    {
+        public LatestTelemetryEncharge() { }
+        [System.Text.Json.Serialization.JsonPropertyName("channel")]
+        public int? Channel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
+        public string? OperationalMode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("power")]
+        public long? Power { get; set; }
+    }
+    public class LatestTelemetryEvse
+    {
+        public LatestTelemetryEvse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
+        public string? OperationalMode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+    }
+    public class LatestTelemetryHeatPump
+    {
+        public LatestTelemetryHeatPump() { }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
+        public string? OperationalMode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+    }
+    public class LatestTelemetryMeter
+    {
+        public LatestTelemetryMeter() { }
+        [System.Text.Json.Serialization.JsonPropertyName("channel")]
+        public int? Channel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("power")]
+        public long? Power { get; set; }
+    }
+    public class LoadControlChannel
+    {
+        public LoadControlChannel() { }
+        [System.Text.Json.Serialization.JsonPropertyName("essential_end_time")]
+        public int? EssentialEndTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("essential_start_time")]
+        public int? EssentialStartTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("load_name")]
+        public string? LoadName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("mode")]
+        public string? Mode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("owner_can_override")]
+        public bool? OwnerCanOverride { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("soc_high")]
+        public int? SocHigh { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("soc_low")]
+        public int? SocLow { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class MeterDevice : Shane32.EnphaseAPI.Models.DeviceInfo
+    {
+        public MeterDevice() { }
+        [System.Text.Json.Serialization.JsonPropertyName("config_type")]
+        public string? ConfigType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("state")]
+        public string? State { get; set; }
+    }
+    public class MicroInterval
+    {
+        public MicroInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("enwh")]
+        public long? Enwh { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("powr")]
+        public long? Powr { get; set; }
+    }
+    public class MicroInverterInfo
+    {
+        public MicroInverterInfo() { }
+        [System.Text.Json.Serialization.JsonPropertyName("energy")]
+        public Shane32.EnphaseAPI.Models.PowerValue? Energy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("envoy_serial_number")]
+        public string? EnvoySerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("grid_profile")]
+        public string? GridProfile { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_date")]
+        public long? LastReportDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("model")]
+        public string? Model { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("param_table")]
+        public string? ParamTable { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("part_number")]
+        public string? PartNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("power_produced")]
+        public System.Text.Json.JsonElement? PowerProduced { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("proc_load")]
+        public string? ProcLoad { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("sku")]
+        public string? Sku { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class PowerValue
+    {
+        public PowerValue() { }
+        [System.Text.Json.Serialization.JsonPropertyName("precision")]
+        public int? Precision { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("units")]
+        public string? Units { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
+        public double? Value { get; set; }
+    }
+    public class ProductionMeterReading
+    {
+        public ProductionMeterReading() { }
+        [System.Text.Json.Serialization.JsonPropertyName("read_at")]
+        public long? ReadAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
+        public long? Value { get; set; }
+    }
+    public class RetrieveSystemIdResponse
+    {
+        public RetrieveSystemIdResponse() { }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class RgmInterval
+    {
+        public RgmInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
+        public long? WhDel { get; set; }
+    }
+    public class RgmMeterChannel
+    {
+        public RgmMeterChannel() { }
+        [System.Text.Json.Serialization.JsonPropertyName("channel")]
+        public int? Channel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("curr_w")]
+        public long? CurrW { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
+        public long? WhDel { get; set; }
+    }
+    public class RgmMeterInterval
+    {
+        public RgmMeterInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("envoy_serial_number")]
+        public string? EnvoySerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("intervals")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.RgmMeterChannel>? Intervals { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("meter_serial_number")]
+        public string? MeterSerialNumber { get; set; }
+    }
+    public class SearchSystemsFilter
+    {
+        public SearchSystemsFilter() { }
+        [System.Text.Json.Serialization.JsonPropertyName("ids")]
+        public System.Collections.Generic.List<int>? Ids { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("other_reference")]
+        public string? OtherReference { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reference")]
+        public string? Reference { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("statuses")]
+        public System.Collections.Generic.List<string>? Statuses { get; set; }
+    }
+    public class SearchSystemsRequest
+    {
+        public SearchSystemsRequest() { }
+        [System.Text.Json.Serialization.JsonPropertyName("sort_by")]
+        public string? SortBy { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system")]
+        public Shane32.EnphaseAPI.Models.SearchSystemsFilter? System { get; set; }
+    }
+    public class StartChargingRequest
+    {
+        public StartChargingRequest() { }
+        [System.Text.Json.Serialization.JsonPropertyName("chargingLevel")]
+        public string? ChargingLevel { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("connectorId")]
+        public string? ConnectorId { get; set; }
+    }
+    public class StormGuardSettings
+    {
+        public StormGuardSettings() { }
+        [System.Text.Json.Serialization.JsonPropertyName("storm_alert")]
+        public string? StormAlert { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("storm_guard_status")]
+        public string? StormGuardStatus { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class SystemAddress
+    {
+        public SystemAddress() { }
+        [System.Text.Json.Serialization.JsonPropertyName("city")]
+        public string? City { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("country")]
+        public string? Country { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("postal_code")]
+        public string? PostalCode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("state")]
+        public string? State { get; set; }
+    }
+    public class SystemAlarm
+    {
+        public SystemAlarm() { }
+        [System.Text.Json.Serialization.JsonPropertyName("alarm_end_time")]
+        public long? AlarmEndTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("alarm_start_time")]
+        public long? AlarmStartTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("cleared")]
+        public bool? Cleared { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_type_id")]
+        public int? EventTypeId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("events")]
+        public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.AlarmEvent>? Events { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public string? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("severity")]
+        public int? Severity { get; set; }
+    }
+    public class SystemDevices
+    {
+        public SystemDevices() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices")]
+        public Shane32.EnphaseAPI.Models.DeviceCollection? Devices { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("items")]
+        public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
+        public int? TotalDevices { get; set; }
+    }
+    public class SystemEvent
+    {
+        public SystemEvent() { }
+        [System.Text.Json.Serialization.JsonPropertyName("event_end_time")]
+        public long? EventEndTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_start_time")]
+        public long? EventStartTime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("event_type_id")]
+        public int? EventTypeId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
+        public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class SystemInfo
+    {
+        public SystemInfo() { }
+        [System.Text.Json.Serialization.JsonPropertyName("address")]
+        public Shane32.EnphaseAPI.Models.SystemAddress? Address { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("attachment_type")]
+        public string? AttachmentType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("connection_type")]
+        public string? ConnectionType { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_lifetime")]
+        public long? EnergyLifetime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_today")]
+        public long? EnergyToday { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("interconnect_date")]
+        public string? InterconnectDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_energy_at")]
+        public long? LastEnergyAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("live_stream")]
+        public string? LiveStream { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
+        public long? OperationalAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("other_references")]
+        public System.Collections.Generic.List<string>? OtherReferences { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("public_name")]
+        public string? PublicName { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reference")]
+        public string? Reference { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_size")]
+        public long? SystemSize { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("timezone")]
+        public string? Timezone { get; set; }
+    }
+    public class SystemMeta
+    {
+        public SystemMeta() { }
+        [System.Text.Json.Serialization.JsonPropertyName("last_energy_at")]
+        public long? LastEnergyAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
+        public long? OperationalAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+    }
+    public class SystemSummary
+    {
+        public SystemSummary() { }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_capacity_wh")]
+        public long? BatteryCapacityWh { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_charge_w")]
+        public long? BatteryChargeW { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_discharge_w")]
+        public long? BatteryDischargeW { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("current_power")]
+        public long? CurrentPower { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_lifetime")]
+        public long? EnergyLifetime { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_today")]
+        public long? EnergyToday { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("evse_power")]
+        public System.Text.Json.JsonElement? EvsePower { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_interval_end_at")]
+        public long? LastIntervalEndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("modules")]
+        public int? Modules { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("nmi")]
+        public string? Nmi { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
+        public long? OperationalAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("size_w")]
+        public int? SizeW { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("source")]
+        public string? Source { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("status")]
+        public string? Status { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("summary_date")]
+        public string? SummaryDate { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("system_id")]
+        public int SystemId { get; set; }
+    }
+    public class TelemetryInterval
+    {
+        public TelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("enwh")]
+        public long? Enwh { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("powr")]
+        public long? Powr { get; set; }
+    }
+    public class TelemetryProductionMeterInterval
+    {
+        public TelemetryProductionMeterInterval() { }
+        [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
+        public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("end_at")]
+        public long? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
+        public long? WhDel { get; set; }
+    }
+    public class UpdateBatterySettingsRequest
+    {
+        public UpdateBatterySettingsRequest() { }
+        [System.Text.Json.Serialization.JsonPropertyName("battery_mode")]
+        public string? BatteryMode { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("energy_independence")]
+        public string? EnergyIndependence { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("reserve_soc")]
+        public int? ReserveSoc { get; set; }
     }
 }
