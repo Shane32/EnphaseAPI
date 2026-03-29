@@ -1,0 +1,161 @@
+# GET /api/v4/systems/{system_id}/energy_import_telemetry — Energy Import Telemetry
+
+Retrieves energy imported from the grid in regular intervals.
+
+- If no `start_at` is specified, defaults to midnight today in the system's timezone.
+- If `start_at` is earlier than the system's first reported date, midnight of the first reported date is used.
+- `end_at` is calculated as the minimum of the current time and `start_at + granularity`.
+- The requested start date must be within 2 years from the current date.
+- An empty list is returned if `last interval < requested start time < current time`.
+
+**Granularity behavior (15-minute intervals):**
+- `15mins`: maximum 1 interval
+- `day`: maximum 96 intervals
+
+**Method:** `GET`  
+**Endpoint:** `/api/v4/systems/{system_id}/energy_import_telemetry`
+
+---
+
+## Path Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `system_id` | integer | Yes | The unique numeric ID of the system. |
+
+## Query Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| `start_at` | integer | No | Start time in Unix epoch format. Alternatively use `start_date` (YYYY-MM-DD). |
+| `granularity` | string | No | Granularity of telemetry data. One of `5mins`, `15mins`, `day`, `week`. Default is `day`. |
+
+---
+
+## Responses
+
+### 200 — Energy Import Telemetry in Intervals
+
+```json
+{
+  "system_id": 698905955,
+  "granularity": "day",
+  "total_devices": 0,
+  "start_at": 1496526300,
+  "end_at": 1496528300,
+  "items": "intervals",
+  "intervals": [
+    [
+      {
+        "end_at": 1384122700,
+        "wh_imported": 40
+      },
+      {
+        "end_at": 1384123600,
+        "wh_imported": 40
+      }
+    ]
+  ],
+  "meta": {
+    "status": "normal",
+    "last_report_at": 1445619615,
+    "last_energy_at": 1445619033,
+    "operational_at": 1357023600
+  }
+}
+```
+
+### Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `system_id` | integer | The system ID |
+| `granularity` | string | Granularity of the returned data |
+| `total_devices` | integer | Total number of devices |
+| `start_at` | integer | Unix epoch of the start of the period (or `start_date` if that parameter was used) |
+| `end_at` | integer | Unix epoch of the end of the period (or `end_date` if that parameter was used) |
+| `items` | string | Always `"intervals"` |
+| `intervals` | array of arrays | Nested array of interval objects |
+| `intervals[][].end_at` | integer | Unix epoch of interval end |
+| `intervals[][].wh_imported` | integer | Energy imported from the grid in Wh during this interval |
+| `meta.status` | string | System status |
+| `meta.last_report_at` | integer | Unix epoch of last system report |
+| `meta.last_energy_at` | integer | Unix epoch of last energy report |
+| `meta.operational_at` | integer | Unix epoch when system became operational |
+
+### 401 — Authentication Error
+
+```json
+{
+  "message": "Not Authorized",
+  "details": "User is not authorized",
+  "code": 401
+}
+```
+
+### 403 — Forbidden
+
+```json
+{
+  "message": "Forbidden",
+  "details": "Not authorized to access this resource",
+  "code": 403
+}
+```
+
+### 404 — Not Found
+
+```json
+{
+  "message": "Not Found",
+  "details": "System not found for {:id=>\"1\"}",
+  "code": 404
+}
+```
+
+### 405 — Method Not Allowed
+
+```json
+{
+  "reason": "405",
+  "message": ["Method not allowed"]
+}
+```
+
+### 422 — Unprocessable Entity
+
+```json
+{
+  "message": "Unprocessable Entity",
+  "details": "Invalid request because of 'Requested date range is invalid for this system.'",
+  "code": 422
+}
+```
+
+### 429 — Too Many Requests
+
+```json
+{
+  "message": "Too Many Requests",
+  "details": "Usage limit exceeded for plan Kilowatt",
+  "code": 429
+}
+```
+
+### 501 — Not Implemented
+
+```json
+{
+  "reason": "501",
+  "message": ["Not Implemented"]
+}
+```
+
+---
+
+## See Also
+
+- [Energy Import Lifetime](energy-import-lifetime.md) — Daily lifetime grid import time series
+- [Energy Export Telemetry](energy-export-telemetry.md) — Grid export telemetry intervals
+- [Telemetry: Consumption Meter](telemetry-consumption-meter.md) — Consumption meter telemetry intervals
+- [Back to API Index](../README.md)
