@@ -7,5 +7,5 @@ public class GetEvChargerEventsResponse
 {
     [JsonPropertyName("count")] public int? Count { get; set; }
     [JsonPropertyName("events")] public List<EvChargerEvent>? Events { get; set; }
-    [JsonPropertyName("system_id")] public int SystemId { get; set; }
+    [JsonPropertyName("system_id")] public int? SystemId { get; set; }
 }

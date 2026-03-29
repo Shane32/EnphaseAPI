@@ -11,7 +11,6 @@ public class EvChargerDeviceInfo
     [JsonPropertyName("name")] public string? Name { get; set; }
     [JsonPropertyName("model")] public string? Model { get; set; }
     [JsonPropertyName("part_number")] public string? PartNumber { get; set; }
-    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
     [JsonPropertyName("firmware")] public string? Firmware { get; set; }
     [JsonPropertyName("active")] public bool? Active { get; set; }
 }
