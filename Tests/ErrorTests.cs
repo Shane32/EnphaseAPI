@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text.Json;
 using Shane32.EnphaseAPI;
 using Shouldly;
 
@@ -100,5 +101,12 @@ public class ErrorTests : TestBase
         var ex = await Should.ThrowAsync<EnphaseNotImplementedException>(() => Client.GetSystemsAsync());
         ex.Message.ShouldBe("Not Implemented");
         ex.HttpStatusCode.ShouldBe(501);
+    }
+
+    [Fact]
+    public async Task UnmappedMember_ThrowsJsonExceptionAsync()
+    {
+        SetupJsonResponse(@"{""system_id"":72,""name"":""Test"",""status"":""normal"",""unknown_field"":""value""}");
+        await Should.ThrowAsync<JsonException>(() => Client.GetSystemAsync(72));
     }
 }
