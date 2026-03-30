@@ -28,6 +28,9 @@ public class EvChargerDeviceInfo
     /// <summary>Gets or sets the manufacturer part number.</summary>
     [JsonPropertyName("part_number")] public string? PartNumber { get; set; }
 
+    /// <summary>Gets or sets the Unix timestamp of the last report from the device.</summary>
+    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
+
     /// <summary>Gets or sets the firmware version installed on the device.</summary>
     [JsonPropertyName("firmware")] public string? Firmware { get; set; }
 

@@ -379,6 +379,8 @@ namespace Shane32.EnphaseAPI.Models
         public string? Firmware { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string? Id { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
+        public long? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
