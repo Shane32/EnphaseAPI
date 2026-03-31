@@ -165,49 +165,54 @@ static int? PromptIntOptional(string message)
 static DateTimeOffset PromptTimestamp(string message)
 {
     while (true) {
-        Console.Write($"{message} (Unix timestamp): ");
+        Console.Write($"{message} (e.g. 2025-01-15T08:30:00Z): ");
         var input = Console.ReadLine()?.Trim();
-        if (long.TryParse(input, out long value))
-            return DateTimeOffset.FromUnixTimeSeconds(value);
-        Console.WriteLine("Invalid Unix timestamp. Please try again.");
+        if (!string.IsNullOrEmpty(input) &&
+            DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date/time. Please try again.");
     }
 }
 
 static DateTimeOffset? PromptTimestampOptional(string message)
 {
-    Console.Write($"{message} (Unix timestamp, optional, press Enter to skip): ");
-    var input = Console.ReadLine()?.Trim();
-    if (string.IsNullOrEmpty(input))
-        return null;
-    if (long.TryParse(input, out long value))
-        return DateTimeOffset.FromUnixTimeSeconds(value);
-    Console.WriteLine("Invalid Unix timestamp, treating as empty.");
-    return null;
+    while (true) {
+        Console.Write($"{message} (e.g. 2025-01-15T08:30:00Z, optional, press Enter to skip): ");
+        var input = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(input))
+            return null;
+        if (DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date/time. Please try again or press Enter to skip.");
+    }
 }
 
 static DateTimeOffset? PromptDateOptional(string message)
 {
-    Console.Write($"{message} (YYYY-MM-DD, optional, press Enter to skip): ");
-    var input = Console.ReadLine()?.Trim();
-    if (string.IsNullOrEmpty(input))
-        return null;
-    if (DateTimeOffset.TryParseExact(input, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
-            System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
-        return dto;
-    Console.WriteLine("Invalid date, treating as empty.");
-    return null;
+    while (true) {
+        Console.Write($"{message} (e.g. 2025-01-15, optional, press Enter to skip): ");
+        var input = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(input))
+            return null;
+        if (DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date. Please try again or press Enter to skip.");
+    }
 }
 
 static DateTimeOffset PromptDate(string message)
 {
     while (true) {
-        Console.Write($"{message} (YYYY-MM-DD): ");
+        Console.Write($"{message} (e.g. 2025-01-15): ");
         var input = Console.ReadLine()?.Trim();
         if (!string.IsNullOrEmpty(input) &&
-            DateTimeOffset.TryParseExact(input, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
+            DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
                 System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
             return dto;
-        Console.WriteLine("Invalid date. Please enter a date in YYYY-MM-DD format.");
+        Console.WriteLine("Invalid date. Please try again.");
     }
 }
 
