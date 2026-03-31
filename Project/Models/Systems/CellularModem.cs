@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -16,9 +18,11 @@ public class CellularModem
     /// <summary>Gets or sets the SKU of the modem.</summary>
     [JsonPropertyName("sku")] public string? Sku { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the cellular data plan started.</summary>
-    [JsonPropertyName("plan_start_date")] public long? PlanStartDate { get; set; }
+    /// <summary>Gets or sets the date and time when the cellular data plan started.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("plan_start_date")] public DateTimeOffset? PlanStartDate { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the cellular data plan expires.</summary>
-    [JsonPropertyName("plan_end_date")] public long? PlanEndDate { get; set; }
+    /// <summary>Gets or sets the date and time when the cellular data plan expires.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("plan_end_date")] public DateTimeOffset? PlanEndDate { get; set; }
 }

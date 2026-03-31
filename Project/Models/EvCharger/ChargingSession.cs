@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -7,11 +9,13 @@ namespace Shane32.EnphaseAPI.Models;
 /// </summary>
 public class ChargingSession
 {
-    /// <summary>Gets or sets the Unix timestamp when the charging session started.</summary>
-    [JsonPropertyName("start_time")] public long StartTime { get; set; }
+    /// <summary>Gets or sets the date and time when the charging session started.</summary>
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    [JsonPropertyName("start_time")] public DateTimeOffset StartTime { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the charging session ended.</summary>
-    [JsonPropertyName("end_time")] public long EndTime { get; set; }
+    /// <summary>Gets or sets the date and time when the charging session ended.</summary>
+    [JsonConverter(typeof(UnixTimestampConverter))]
+    [JsonPropertyName("end_time")] public DateTimeOffset EndTime { get; set; }
 
     /// <summary>Gets or sets the total duration of the session in seconds.</summary>
     [JsonPropertyName("duration")] public long Duration { get; set; }

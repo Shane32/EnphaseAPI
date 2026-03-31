@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -10,9 +11,11 @@ public class StormGuardSettings
     /// <summary>Gets or sets the system identifier.</summary>
     [JsonPropertyName("system_id")] public int SystemId { get; set; }
 
-    /// <summary>Gets or sets the Storm Guard feature status (e.g. "enabled", "disabled").</summary>
-    [JsonPropertyName("storm_guard_status")] public string? StormGuardStatus { get; set; }
+    /// <summary>Gets or sets whether the Storm Guard feature is enabled.</summary>
+    [JsonConverter(typeof(EnabledDisabledConverter))]
+    [JsonPropertyName("storm_guard_status")] public bool? StormGuardStatus { get; set; }
 
     /// <summary>Gets or sets the current storm alert status indicating whether a storm is forecasted.</summary>
-    [JsonPropertyName("storm_alert")] public string? StormAlert { get; set; }
+    [JsonConverter(typeof(StringBoolConverter))]
+    [JsonPropertyName("storm_alert")] public bool? StormAlert { get; set; }
 }

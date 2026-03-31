@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -14,5 +15,6 @@ public class UpdateBatterySettingsRequest
     [JsonPropertyName("reserve_soc")] public int? ReserveSoc { get; set; }
 
     /// <summary>Gets or sets the energy independence setting.</summary>
-    [JsonPropertyName("energy_independence")] public string? EnergyIndependence { get; set; }
+    [JsonConverter(typeof(EnabledDisabledConverter))]
+    [JsonPropertyName("energy_independence")] public bool? EnergyIndependence { get; set; }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -20,11 +22,13 @@ public class GetEnchargeTelemetryResponse
     /// <summary>Gets or sets the total number of Encharge devices.</summary>
     [JsonPropertyName("total_devices")] public int? TotalDevices { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the first interval in the response.</summary>
-    [JsonPropertyName("start_at")] public long? StartAt { get; set; }
+    /// <summary>Gets or sets the date and time of the first interval in the response.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("start_at")] public DateTimeOffset? StartAt { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the last interval in the response.</summary>
-    [JsonPropertyName("end_at")] public long? EndAt { get; set; }
+    /// <summary>Gets or sets the date and time of the last interval in the response.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("end_at")] public DateTimeOffset? EndAt { get; set; }
 
     /// <summary>Gets or sets the type of items contained in the intervals list.</summary>
     [JsonPropertyName("items")] public string? Items { get; set; }
@@ -32,8 +36,9 @@ public class GetEnchargeTelemetryResponse
     /// <summary>Gets or sets the list of Encharge telemetry intervals.</summary>
     [JsonPropertyName("intervals")] public List<EnchargeInterval>? Intervals { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent report from this device.</summary>
-    [JsonPropertyName("last_reported_time")] public long? LastReportedTime { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent report from this device.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_reported_time")] public DateTimeOffset? LastReportedTime { get; set; }
 
     /// <summary>Gets or sets the most recently reported state-of-charge for this device.</summary>
     [JsonPropertyName("last_reported_soc")] public string? LastReportedSoc { get; set; }

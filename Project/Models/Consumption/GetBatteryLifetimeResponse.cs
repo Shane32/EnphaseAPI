@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -11,8 +13,9 @@ public class GetBatteryLifetimeResponse
     /// <summary>Gets or sets the system identifier.</summary>
     [JsonPropertyName("system_id")] public int SystemId { get; set; }
 
-    /// <summary>Gets or sets the first date (YYYY-MM-DD) in the series.</summary>
-    [JsonPropertyName("start_date")] public string? StartDate { get; set; }
+    /// <summary>Gets or sets the first date in the series.</summary>
+    [JsonConverter(typeof(NullableDateTimeOffsetDateConverter))]
+    [JsonPropertyName("start_date")] public DateTimeOffset? StartDate { get; set; }
 
     /// <summary>Gets or sets the list of daily battery charge values in Wh, one entry per day starting from <see cref="StartDate"/>.</summary>
     [JsonPropertyName("charge")] public List<long>? Charge { get; set; }

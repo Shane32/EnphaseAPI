@@ -162,27 +162,58 @@ static int? PromptIntOptional(string message)
     return null;
 }
 
-static long PromptLong(string message)
+static DateTimeOffset PromptTimestamp(string message)
 {
     while (true) {
-        Console.Write(message);
+        Console.Write($"{message} (e.g. 2025-01-15T08:30:00Z): ");
         var input = Console.ReadLine()?.Trim();
-        if (long.TryParse(input, out long value))
-            return value;
-        Console.WriteLine("Invalid integer. Please try again.");
+        if (!string.IsNullOrEmpty(input) &&
+            DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date/time. Please try again.");
     }
 }
 
-static long? PromptLongOptional(string message)
+static DateTimeOffset? PromptTimestampOptional(string message)
 {
-    Console.Write($"{message} (optional, press Enter to skip): ");
-    var input = Console.ReadLine()?.Trim();
-    if (string.IsNullOrEmpty(input))
-        return null;
-    if (long.TryParse(input, out long value))
-        return value;
-    Console.WriteLine("Invalid integer, treating as empty.");
-    return null;
+    while (true) {
+        Console.Write($"{message} (e.g. 2025-01-15T08:30:00Z, optional, press Enter to skip): ");
+        var input = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(input))
+            return null;
+        if (DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date/time. Please try again or press Enter to skip.");
+    }
+}
+
+static DateTimeOffset? PromptDateOptional(string message)
+{
+    while (true) {
+        Console.Write($"{message} (e.g. 2025-01-15, optional, press Enter to skip): ");
+        var input = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(input))
+            return null;
+        if (DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date. Please try again or press Enter to skip.");
+    }
+}
+
+static DateTimeOffset PromptDate(string message)
+{
+    while (true) {
+        Console.Write($"{message} (e.g. 2025-01-15): ");
+        var input = Console.ReadLine()?.Trim();
+        if (!string.IsNullOrEmpty(input) &&
+            DateTimeOffset.TryParse(input, System.Globalization.CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
+            return dto;
+        Console.WriteLine("Invalid date. Please try again.");
+    }
 }
 
 static bool? PromptBoolOptional(string message)
@@ -361,7 +392,7 @@ static async Task SystemsMenuAsync(IEnphaseClient client)
         }
         case "4": {
             var systemId = PromptInt("System ID: ");
-            var summaryDate = PromptOptional("Summary date (YYYY-MM-DD)");
+            var summaryDate = PromptDateOptional("Summary date");
             PrintResponse(await client.GetSystemSummaryAsync(systemId, summaryDate));
             break;
         }
@@ -377,15 +408,15 @@ static async Task SystemsMenuAsync(IEnphaseClient client)
         }
         case "7": {
             var systemId = PromptInt("System ID: ");
-            var startTime = PromptLong("Start time (Unix timestamp): ");
-            var endTime = PromptLongOptional("End time (Unix timestamp)");
+            var startTime = PromptTimestamp("Start time");
+            var endTime = PromptTimestampOptional("End time");
             PrintResponse(await client.GetSystemEventsAsync(systemId, startTime, endTime));
             break;
         }
         case "8": {
             var systemId = PromptInt("System ID: ");
-            var startTime = PromptLong("Start time (Unix timestamp): ");
-            var endTime = PromptLongOptional("End time (Unix timestamp)");
+            var startTime = PromptTimestamp("Start time");
+            var endTime = PromptTimestampOptional("End time");
             var cleared = PromptBoolOptional("Cleared");
             PrintResponse(await client.GetSystemAlarmsAsync(systemId, startTime, endTime, cleared));
             break;
@@ -436,35 +467,35 @@ static async Task ProductionMenuAsync(IEnphaseClient client)
     switch (choice) {
         case "1": {
             var systemId = PromptInt("System ID: ");
-            var endAt = PromptLongOptional("End at (Unix timestamp)");
+            var endAt = PromptTimestampOptional("End at");
             PrintResponse(await client.GetProductionMeterReadingsAsync(systemId, endAt));
             break;
         }
         case "2": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
-            var endAt = PromptLongOptional("End at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
+            var endAt = PromptTimestampOptional("End at");
             PrintResponse(await client.GetRgmStatsAsync(systemId, startAt, endAt));
             break;
         }
         case "3": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             var production = PromptOptional("Production (e.g. 'all')");
             PrintResponse(await client.GetEnergyLifetimeAsync(systemId, startDate, endDate, production));
             break;
         }
         case "4": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetProductionMicroTelemetryAsync(systemId, startAt, granularity));
             break;
         }
         case "5": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetProductionMeterTelemetryAsync(systemId, startAt, granularity));
             break;
@@ -503,68 +534,68 @@ static async Task ConsumptionMenuAsync(IEnphaseClient client)
     switch (choice) {
         case "1": {
             var systemId = PromptInt("System ID: ");
-            var endAt = PromptLongOptional("End at (Unix timestamp)");
+            var endAt = PromptTimestampOptional("End at");
             PrintResponse(await client.GetConsumptionMeterReadingsAsync(systemId, endAt));
             break;
         }
         case "2": {
             var systemId = PromptInt("System ID: ");
-            var endAt = PromptLongOptional("End at (Unix timestamp)");
+            var endAt = PromptTimestampOptional("End at");
             PrintResponse(await client.GetStorageMeterReadingsAsync(systemId, endAt));
             break;
         }
         case "3": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetConsumptionLifetimeAsync(systemId, startDate, endDate));
             break;
         }
         case "4": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetBatteryLifetimeAsync(systemId, startDate, endDate));
             break;
         }
         case "5": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetEnergyImportLifetimeAsync(systemId, startDate, endDate));
             break;
         }
         case "6": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetEnergyExportLifetimeAsync(systemId, startDate, endDate));
             break;
         }
         case "7": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetBatteryTelemetryAsync(systemId, startAt, granularity));
             break;
         }
         case "8": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetConsumptionMeterTelemetryAsync(systemId, startAt, granularity));
             break;
         }
         case "9": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetEnergyImportTelemetryAsync(systemId, startAt, granularity));
             break;
         }
         case "10": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetEnergyExportTelemetryAsync(systemId, startAt, granularity));
             break;
@@ -604,7 +635,7 @@ static async Task DeviceMenuAsync(IEnphaseClient client)
         case "1": {
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetMicroTelemetryAsync(systemId, serialNo, startAt, granularity));
             break;
@@ -612,7 +643,7 @@ static async Task DeviceMenuAsync(IEnphaseClient client)
         case "2": {
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             PrintResponse(await client.GetEnchargeTelemetryAsync(systemId, serialNo, startAt, granularity));
             break;
@@ -620,15 +651,15 @@ static async Task DeviceMenuAsync(IEnphaseClient client)
         case "3": {
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetEvseLifetimeAsync(systemId, serialNo, startDate, endDate));
             break;
         }
         case "4": {
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startAt = PromptTimestampOptional("Start at");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             var intervalDuration = PromptOptional("Interval duration");
             PrintResponse(await client.GetEvseTelemetryAsync(systemId, serialNo, startAt, granularity, intervalDuration));
@@ -636,15 +667,15 @@ static async Task DeviceMenuAsync(IEnphaseClient client)
         }
         case "5": {
             var systemId = PromptInt("System ID: ");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDateOptional("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetHpLifetimeAsync(systemId, startDate, endDate));
             break;
         }
         case "6": {
             var systemId = PromptInt("System ID: ");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
+            var startAt = PromptTimestampOptional("Start at");
+            var startDate = PromptDateOptional("Start date");
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
             var intervalDuration = PromptOptional("Interval duration");
             PrintResponse(await client.GetHpTelemetryAsync(systemId, startAt, startDate, granularity, intervalDuration));
@@ -685,7 +716,7 @@ static async Task ConfigMenuAsync(IEnphaseClient client)
             var systemId = PromptInt("System ID: ");
             var batteryMode = PromptOptional("Battery mode (e.g. 'backup', 'self-consumption')");
             var reserveSoc = PromptIntOptional("Reserve SoC (%)");
-            var energyIndependence = PromptOptional("Energy independence");
+            var energyIndependence = PromptBoolOptional("Energy independence");
             var request = new UpdateBatterySettingsRequest {
                 BatteryMode = batteryMode,
                 ReserveSoc = reserveSoc,
@@ -768,8 +799,8 @@ static async Task EvChargerMenuAsync(IEnphaseClient client)
         case "5": {
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
-            var startDate = Prompt("Start date (YYYY-MM-DD): ", required: true);
-            var endDate = PromptOptional("End date (YYYY-MM-DD)");
+            var startDate = PromptDate("Start date");
+            var endDate = PromptDateOptional("End date");
             PrintResponse(await client.GetEvChargerLifetimeAsync(systemId, serialNo, startDate, endDate));
             break;
         }
@@ -777,8 +808,8 @@ static async Task EvChargerMenuAsync(IEnphaseClient client)
             var systemId = PromptInt("System ID: ");
             var serialNo = Prompt("Serial number: ", required: true);
             var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
-            var startDate = PromptOptional("Start date (YYYY-MM-DD)");
-            var startAt = PromptLongOptional("Start at (Unix timestamp)");
+            var startDate = PromptDateOptional("Start date");
+            var startAt = PromptTimestampOptional("Start at");
             PrintResponse(await client.GetEvChargerTelemetryAsync(systemId, serialNo, granularity, startDate, startAt));
             break;
         }

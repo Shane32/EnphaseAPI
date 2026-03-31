@@ -1,5 +1,7 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -20,17 +22,20 @@ public class SystemSummary
     /// <summary>Gets or sets the energy produced today in Wh.</summary>
     [JsonPropertyName("energy_today")] public long? EnergyToday { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp at which the last telemetry interval ended.</summary>
-    [JsonPropertyName("last_interval_end_at")] public long? LastIntervalEndAt { get; set; }
+    /// <summary>Gets or sets the date and time at which the last telemetry interval ended.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_interval_end_at")] public DateTimeOffset? LastIntervalEndAt { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent data report.</summary>
-    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent data report.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_report_at")] public DateTimeOffset? LastReportAt { get; set; }
 
     /// <summary>Gets or sets the total number of installed modules (micro-inverters).</summary>
     [JsonPropertyName("modules")] public int? Modules { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the system first became operational.</summary>
-    [JsonPropertyName("operational_at")] public long? OperationalAt { get; set; }
+    /// <summary>Gets or sets the date and time when the system first became operational.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("operational_at")] public DateTimeOffset? OperationalAt { get; set; }
 
     /// <summary>Gets or sets the total installed system size in W.</summary>
     [JsonPropertyName("size_w")] public int? SizeW { get; set; }
@@ -44,8 +49,9 @@ public class SystemSummary
     /// <summary>Gets or sets the operational status of the system.</summary>
     [JsonPropertyName("status")] public string? Status { get; set; }
 
-    /// <summary>Gets or sets the date (YYYY-MM-DD) this summary covers.</summary>
-    [JsonPropertyName("summary_date")] public string? SummaryDate { get; set; }
+    /// <summary>Gets or sets the date this summary covers.</summary>
+    [JsonConverter(typeof(NullableDateTimeOffsetDateConverter))]
+    [JsonPropertyName("summary_date")] public DateTimeOffset? SummaryDate { get; set; }
 
     /// <summary>Gets or sets the current battery charging rate in W.</summary>
     [JsonPropertyName("battery_charge_w")] public long? BatteryChargeW { get; set; }

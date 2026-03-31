@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -13,6 +15,7 @@ public class ProductionMeterReading
     /// <summary>Gets or sets the cumulative energy reading in Wh.</summary>
     [JsonPropertyName("value")] public long? Value { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when this reading was taken.</summary>
-    [JsonPropertyName("read_at")] public long? ReadAt { get; set; }
+    /// <summary>Gets or sets the date and time when this reading was taken.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("read_at")] public DateTimeOffset? ReadAt { get; set; }
 }
