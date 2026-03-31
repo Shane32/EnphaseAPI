@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <!-- CA1859: console app methods intentionally use IEnphaseClient interface for flexibility -->
     <NoWarn>$(NoWarn);CA1859</NoWarn>
+    <UserSecretsId>f9606bdc-a584-4a54-9d57-c766cd0fc8f8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
