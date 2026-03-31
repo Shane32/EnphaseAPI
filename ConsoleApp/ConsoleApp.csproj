@@ -3,7 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- CA1859: console app methods intentionally use IEnphaseClient interface for flexibility -->
+    <NoWarn>$(NoWarn);CA1859</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.*" />
+    <PackageReference Include="Shane32.ConsoleDI" Version="1.1.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Project\Shane32.EnphaseAPI.csproj" />
