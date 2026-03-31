@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -17,10 +18,12 @@ public class BatterySettings
     [JsonPropertyName("reserve_soc")] public int? ReserveSoc { get; set; }
 
     /// <summary>Gets or sets the energy independence setting.</summary>
-    [JsonPropertyName("energy_independence")] public string? EnergyIndependence { get; set; }
+    [JsonConverter(typeof(EnabledDisabledConverter))]
+    [JsonPropertyName("energy_independence")] public bool? EnergyIndependence { get; set; }
 
     /// <summary>Gets or sets whether the battery is allowed to charge from the grid.</summary>
-    [JsonPropertyName("charge_from_grid")] public string? ChargeFromGrid { get; set; }
+    [JsonConverter(typeof(EnabledDisabledConverter))]
+    [JsonPropertyName("charge_from_grid")] public bool? ChargeFromGrid { get; set; }
 
     /// <summary>Gets or sets the battery state-of-charge percentage at which the system shuts down.</summary>
     [JsonPropertyName("battery_shutdown_level")] public int? BatteryShutdownLevel { get; set; }

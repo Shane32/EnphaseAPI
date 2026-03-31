@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -16,8 +18,9 @@ public class LatestTelemetryEncharge
     /// <summary>Gets or sets the channel number of the device.</summary>
     [JsonPropertyName("channel")] public int? Channel { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent report from this device.</summary>
-    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent report from this device.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_report_at")] public DateTimeOffset? LastReportAt { get; set; }
 
     /// <summary>Gets or sets the current power output in watts.</summary>
     [JsonPropertyName("power")] public long? Power { get; set; }

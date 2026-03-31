@@ -36,7 +36,7 @@ public class ConfigTests : TestBase
         SetupJsonResponse(@"{""system_id"":1765,""storm_guard_status"":""enabled"",""storm_alert"":""false""}");
         var result = await Client.GetStormGuardAsync(1765);
         result.SystemId.ShouldBe(1765);
-        result.StormGuardStatus.ShouldBe("enabled");
+        result.StormGuardStatus.ShouldBe(true);
         AssertRequest("/api/v4/systems/config/1765/storm_guard");
     }
 

@@ -1,4 +1,6 @@
+using System;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -10,11 +12,13 @@ public class EvChargerEvent
     /// <summary>Gets or sets the event status (e.g. "active", "cleared").</summary>
     [JsonPropertyName("status")] public string? Status { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the event was triggered.</summary>
-    [JsonPropertyName("triggered_date")] public long? TriggeredDate { get; set; }
+    /// <summary>Gets or sets the date and time when the event was triggered.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("triggered_date")] public DateTimeOffset? TriggeredDate { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the event was cleared.</summary>
-    [JsonPropertyName("cleared_date")] public long? ClearedDate { get; set; }
+    /// <summary>Gets or sets the date and time when the event was cleared.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("cleared_date")] public DateTimeOffset? ClearedDate { get; set; }
 
     /// <summary>Gets or sets additional detail about the event.</summary>
     [JsonPropertyName("details")] public string? Details { get; set; }

@@ -13,46 +13,46 @@ namespace Shane32.EnphaseAPI
         public EnphaseClient(System.Net.Http.HttpClient httpClient, Microsoft.Extensions.Options.IOptions<Shane32.EnphaseAPI.EnphaseClientOptions> options, System.TimeProvider timeProvider) { }
         public string AccessToken { get; set; }
         protected virtual System.Threading.Tasks.Task<TResponse> GetAsync<TResponse>(string url) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default, string? production = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset startDate, System.DateTimeOffset? endDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null, string? intervalDuration = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, string? granularity = null, string? intervalDuration = null) { }
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = default, long? endAt = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? endAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = default, bool? cleared = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, System.DateTimeOffset startTime, System.DateTimeOffset? endTime = default, bool? cleared = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemInfo> GetSystemAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemDevices> GetSystemDevicesAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, System.DateTimeOffset startTime, System.DateTimeOffset? endTime = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, System.DateTimeOffset? summaryDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> GetSystemsAsync(int? page = default, int? size = default, string? sortBy = null) { }
         protected virtual System.Threading.Tasks.Task<TResponse> PostAsync<TResponse>(string url, object? body = null) { }
         protected virtual System.Threading.Tasks.Task<TResponse> PutAsync<TResponse>(string url, object? body = null) { }
@@ -111,46 +111,46 @@ namespace Shane32.EnphaseAPI
     public interface IEnphaseClient
     {
         string AccessToken { get; set; }
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default, string? production = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset startDate, System.DateTimeOffset? endDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null, string? intervalDuration = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = default, string? startDate = null, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, string? granularity = null, string? intervalDuration = null);
         System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = default, long? endAt = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? endAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = default, bool? cleared = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, System.DateTimeOffset startTime, System.DateTimeOffset? endTime = default, bool? cleared = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemInfo> GetSystemAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemDevices> GetSystemDevicesAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemEventsResponse> GetSystemEventsAsync(int systemId, System.DateTimeOffset startTime, System.DateTimeOffset? endTime = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.SystemSummary> GetSystemSummaryAsync(int systemId, System.DateTimeOffset? summaryDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> GetSystemsAsync(int? page = default, int? size = default, string? sortBy = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.RetrieveSystemIdResponse> RetrieveSystemIdAsync(string serialNum);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetSystemsResponse> SearchSystemsAsync(Shane32.EnphaseAPI.Models.SearchSystemsRequest request, int? page = default, int? size = default, bool? liveStream = default);
@@ -169,12 +169,14 @@ namespace Shane32.EnphaseAPI.Models
     public class AlarmEvent
     {
         public AlarmEvent() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_date")]
-        public long? EndDate { get; set; }
+        public System.DateTimeOffset? EndDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
         public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public long? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
     }
     public class BatteryEnergyData
     {
@@ -191,10 +193,12 @@ namespace Shane32.EnphaseAPI.Models
         public string? BatteryMode { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("battery_shutdown_level")]
         public int? BatteryShutdownLevel { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.EnabledDisabledConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("charge_from_grid")]
-        public string? ChargeFromGrid { get; set; }
+        public bool? ChargeFromGrid { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.EnabledDisabledConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("energy_independence")]
-        public string? EnergyIndependence { get; set; }
+        public bool? EnergyIndependence { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("reserve_soc")]
         public int? ReserveSoc { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
@@ -215,8 +219,9 @@ namespace Shane32.EnphaseAPI.Models
         public Shane32.EnphaseAPI.Models.BatteryEnergyData? Charge { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("discharge")]
         public Shane32.EnphaseAPI.Models.BatteryEnergyData? Discharge { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("soc")]
         public Shane32.EnphaseAPI.Models.BatterySocData? Soc { get; set; }
     }
@@ -227,10 +232,12 @@ namespace Shane32.EnphaseAPI.Models
         public string? Imei { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("part_num")]
         public string? PartNum { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("plan_end_date")]
-        public long? PlanEndDate { get; set; }
+        public System.DateTimeOffset? PlanEndDate { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("plan_start_date")]
-        public long? PlanStartDate { get; set; }
+        public System.DateTimeOffset? PlanStartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("sku")]
         public string? Sku { get; set; }
     }
@@ -275,22 +282,25 @@ namespace Shane32.EnphaseAPI.Models
         public double Cost { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("duration")]
         public long Duration { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.UnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_time")]
-        public long EndTime { get; set; }
+        public System.DateTimeOffset EndTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("energy_added")]
         public double EnergyAdded { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("miles_added")]
         public double MilesAdded { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.UnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("start_time")]
-        public long StartTime { get; set; }
+        public System.DateTimeOffset StartTime { get; set; }
     }
     public class ConsumptionMeterInterval
     {
         public ConsumptionMeterInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
         public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("enwh")]
         public long? Enwh { get; set; }
     }
@@ -323,8 +333,9 @@ namespace Shane32.EnphaseAPI.Models
         public System.Text.Json.JsonElement? Active { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public long Id { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -353,8 +364,9 @@ namespace Shane32.EnphaseAPI.Models
         public Shane32.EnphaseAPI.Models.EnchargeEnergyData? Charge { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("discharge")]
         public Shane32.EnphaseAPI.Models.EnchargeEnergyData? Discharge { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("soc")]
         public Shane32.EnphaseAPI.Models.EnchargeSocData? Soc { get; set; }
     }
@@ -379,8 +391,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Firmware { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public string? Id { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
@@ -415,22 +428,25 @@ namespace Shane32.EnphaseAPI.Models
     public class EvChargerEvent
     {
         public EvChargerEvent() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("cleared_date")]
-        public long? ClearedDate { get; set; }
+        public System.DateTimeOffset? ClearedDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("details")]
         public string? Details { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("status")]
         public string? Status { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("triggered_date")]
-        public long? TriggeredDate { get; set; }
+        public System.DateTimeOffset? TriggeredDate { get; set; }
     }
     public class EvChargerTelemetryInterval
     {
         public EvChargerTelemetryInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
         public int? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
     }
     public class EventType
     {
@@ -451,16 +467,18 @@ namespace Shane32.EnphaseAPI.Models
     public class EvseInterval
     {
         public EvseInterval() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_consumed")]
         public long? WhConsumed { get; set; }
     }
     public class ExportTelemetryInterval
     {
         public ExportTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_exported")]
         public long? WhExported { get; set; }
     }
@@ -481,16 +499,18 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<long>? Discharge { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class GetBatteryTelemetryResponse
     {
         public GetBatteryTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -499,8 +519,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("last_reported_aggregate_soc")]
         public string? LastReportedAggregateSoc { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -513,8 +534,9 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<long>? Consumption { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -531,8 +553,9 @@ namespace Shane32.EnphaseAPI.Models
     public class GetConsumptionMeterTelemetryResponse
     {
         public GetConsumptionMeterTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -541,8 +564,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -551,8 +575,9 @@ namespace Shane32.EnphaseAPI.Models
     public class GetEnchargeTelemetryResponse
     {
         public GetEnchargeTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -561,12 +586,14 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("last_reported_soc")]
         public string? LastReportedSoc { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_reported_time")]
-        public long? LastReportedTime { get; set; }
+        public System.DateTimeOffset? LastReportedTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
         public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -579,16 +606,18 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<long>? Export { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class GetEnergyExportTelemetryResponse
     {
         public GetEnergyExportTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -597,8 +626,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -611,16 +641,18 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<long>? Import { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class GetEnergyImportTelemetryResponse
     {
         public GetEnergyImportTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -629,8 +661,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -643,14 +676,16 @@ namespace Shane32.EnphaseAPI.Models
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meter_production")]
         public System.Collections.Generic.List<long>? MeterProduction { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("meter_start_date")]
-        public string? MeterStartDate { get; set; }
+        public System.DateTimeOffset? MeterStartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("micro_production")]
         public System.Collections.Generic.List<long>? MicroProduction { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("production")]
         public System.Collections.Generic.List<long>? Production { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -669,8 +704,9 @@ namespace Shane32.EnphaseAPI.Models
         public GetEvChargerLifetimeResponse() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
         public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public long? SystemId { get; set; }
     }
@@ -697,16 +733,20 @@ namespace Shane32.EnphaseAPI.Models
         public GetEvChargerTelemetryResponse() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvChargerTelemetryInterval>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_date")]
-        public string? EndDate { get; set; }
+        public System.DateTimeOffset? EndDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int? SystemId { get; set; }
     }
@@ -721,18 +761,21 @@ namespace Shane32.EnphaseAPI.Models
         public GetEvseLifetimeResponse() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
         public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_date")]
-        public string? EndDate { get; set; }
+        public System.DateTimeOffset? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class GetEvseTelemetryResponse
     {
         public GetEvseTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("interval_duration")]
@@ -741,8 +784,9 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.EvseInterval>? Intervals { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("items")]
         public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -751,18 +795,21 @@ namespace Shane32.EnphaseAPI.Models
         public GetHpLifetimeResponse() { }
         [System.Text.Json.Serialization.JsonPropertyName("consumption")]
         public System.Collections.Generic.List<long>? Consumption { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_date")]
-        public string? EndDate { get; set; }
+        public System.DateTimeOffset? EndDate { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_date")]
-        public string? StartDate { get; set; }
+        public System.DateTimeOffset? StartDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class GetHpTelemetryResponse
     {
         public GetHpTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("interval_duration")]
@@ -771,8 +818,9 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.HpInterval>? Intervals { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("items")]
         public string? Items { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -797,8 +845,9 @@ namespace Shane32.EnphaseAPI.Models
     public class GetMicroTelemetryResponse
     {
         public GetMicroTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -807,8 +856,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
         public string? SerialNumber { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -835,8 +885,9 @@ namespace Shane32.EnphaseAPI.Models
     public class GetProductionMeterTelemetryResponse
     {
         public GetProductionMeterTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -845,8 +896,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -855,8 +907,9 @@ namespace Shane32.EnphaseAPI.Models
     public class GetProductionMicroTelemetryResponse
     {
         public GetProductionMicroTelemetryResponse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("granularity")]
         public string? Granularity { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("intervals")]
@@ -865,8 +918,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? Items { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("meta")]
         public Shane32.EnphaseAPI.Models.SystemMeta? Meta { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("start_at")]
-        public long? StartAt { get; set; }
+        public System.DateTimeOffset? StartAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total_devices")]
@@ -933,24 +987,27 @@ namespace Shane32.EnphaseAPI.Models
         public GridStatus() { }
         [System.Text.Json.Serialization.JsonPropertyName("grid_state")]
         public string? GridState { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_date")]
-        public long? LastReportDate { get; set; }
+        public System.DateTimeOffset? LastReportDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
     public class HpInterval
     {
         public HpInterval() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_consumed")]
         public long? WhConsumed { get; set; }
     }
     public class ImportTelemetryInterval
     {
         public ImportTelemetryInterval() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_imported")]
         public long? WhImported { get; set; }
     }
@@ -981,8 +1038,9 @@ namespace Shane32.EnphaseAPI.Models
         public int? Channel { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string? Name { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
@@ -993,8 +1051,9 @@ namespace Shane32.EnphaseAPI.Models
     public class LatestTelemetryEvse
     {
         public LatestTelemetryEvse() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string? Name { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
@@ -1005,8 +1064,9 @@ namespace Shane32.EnphaseAPI.Models
     public class LatestTelemetryHeatPump
     {
         public LatestTelemetryHeatPump() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string? Name { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("operational_mode")]
@@ -1021,8 +1081,9 @@ namespace Shane32.EnphaseAPI.Models
         public int? Channel { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string? Name { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("power")]
@@ -1061,8 +1122,9 @@ namespace Shane32.EnphaseAPI.Models
     public class MicroInterval
     {
         public MicroInterval() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("enwh")]
         public long? Enwh { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("powr")]
@@ -1079,8 +1141,9 @@ namespace Shane32.EnphaseAPI.Models
         public string? GridProfile { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public long? Id { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_date")]
-        public long? LastReportDate { get; set; }
+        public System.DateTimeOffset? LastReportDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("model")]
         public string? Model { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("param_table")]
@@ -1111,8 +1174,9 @@ namespace Shane32.EnphaseAPI.Models
     public class ProductionMeterReading
     {
         public ProductionMeterReading() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("read_at")]
-        public long? ReadAt { get; set; }
+        public System.DateTimeOffset? ReadAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
         public string? SerialNumber { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("value")]
@@ -1129,8 +1193,9 @@ namespace Shane32.EnphaseAPI.Models
         public RgmInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
         public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
         public long? WhDel { get; set; }
     }
@@ -1141,8 +1206,9 @@ namespace Shane32.EnphaseAPI.Models
         public int? Channel { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("curr_w")]
         public long? CurrW { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
         public long? WhDel { get; set; }
     }
@@ -1189,10 +1255,12 @@ namespace Shane32.EnphaseAPI.Models
     public class StormGuardSettings
     {
         public StormGuardSettings() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.StringBoolConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("storm_alert")]
-        public string? StormAlert { get; set; }
+        public bool? StormAlert { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.EnabledDisabledConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("storm_guard_status")]
-        public string? StormGuardStatus { get; set; }
+        public bool? StormGuardStatus { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -1211,10 +1279,12 @@ namespace Shane32.EnphaseAPI.Models
     public class SystemAlarm
     {
         public SystemAlarm() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("alarm_end_time")]
-        public long? AlarmEndTime { get; set; }
+        public System.DateTimeOffset? AlarmEndTime { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("alarm_start_time")]
-        public long? AlarmStartTime { get; set; }
+        public System.DateTimeOffset? AlarmStartTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("cleared")]
         public bool? Cleared { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("event_type_id")]
@@ -1241,10 +1311,12 @@ namespace Shane32.EnphaseAPI.Models
     public class SystemEvent
     {
         public SystemEvent() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("event_end_time")]
-        public long? EventEndTime { get; set; }
+        public System.DateTimeOffset? EventEndTime { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("event_start_time")]
-        public long? EventStartTime { get; set; }
+        public System.DateTimeOffset? EventStartTime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("event_type_id")]
         public int? EventTypeId { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("serial_number")]
@@ -1265,18 +1337,22 @@ namespace Shane32.EnphaseAPI.Models
         public long? EnergyLifetime { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("energy_today")]
         public long? EnergyToday { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("interconnect_date")]
-        public string? InterconnectDate { get; set; }
+        public System.DateTimeOffset? InterconnectDate { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_energy_at")]
-        public long? LastEnergyAt { get; set; }
+        public System.DateTimeOffset? LastEnergyAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("live_stream")]
         public string? LiveStream { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string? Name { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
-        public long? OperationalAt { get; set; }
+        public System.DateTimeOffset? OperationalAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("other_references")]
         public System.Collections.Generic.List<string>? OtherReferences { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("public_name")]
@@ -1295,12 +1371,15 @@ namespace Shane32.EnphaseAPI.Models
     public class SystemMeta
     {
         public SystemMeta() { }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_energy_at")]
-        public long? LastEnergyAt { get; set; }
+        public System.DateTimeOffset? LastEnergyAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
-        public long? OperationalAt { get; set; }
+        public System.DateTimeOffset? OperationalAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("status")]
         public string? Status { get; set; }
     }
@@ -1321,24 +1400,28 @@ namespace Shane32.EnphaseAPI.Models
         public long? EnergyToday { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("evse_power")]
         public System.Text.Json.JsonElement? EvsePower { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_interval_end_at")]
-        public long? LastIntervalEndAt { get; set; }
+        public System.DateTimeOffset? LastIntervalEndAt { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("last_report_at")]
-        public long? LastReportAt { get; set; }
+        public System.DateTimeOffset? LastReportAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("modules")]
         public int? Modules { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("nmi")]
         public string? Nmi { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("operational_at")]
-        public long? OperationalAt { get; set; }
+        public System.DateTimeOffset? OperationalAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("size_w")]
         public int? SizeW { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("source")]
         public string? Source { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("status")]
         public string? Status { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableDateTimeOffsetDateConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("summary_date")]
-        public string? SummaryDate { get; set; }
+        public System.DateTimeOffset? SummaryDate { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("system_id")]
         public int SystemId { get; set; }
     }
@@ -1347,8 +1430,9 @@ namespace Shane32.EnphaseAPI.Models
         public TelemetryInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
         public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("enwh")]
         public long? Enwh { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("powr")]
@@ -1359,8 +1443,9 @@ namespace Shane32.EnphaseAPI.Models
         public TelemetryProductionMeterInterval() { }
         [System.Text.Json.Serialization.JsonPropertyName("devices_reporting")]
         public int? DevicesReporting { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.NullableUnixTimestampConverter))]
         [System.Text.Json.Serialization.JsonPropertyName("end_at")]
-        public long? EndAt { get; set; }
+        public System.DateTimeOffset? EndAt { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("wh_del")]
         public long? WhDel { get; set; }
     }
@@ -1369,8 +1454,9 @@ namespace Shane32.EnphaseAPI.Models
         public UpdateBatterySettingsRequest() { }
         [System.Text.Json.Serialization.JsonPropertyName("battery_mode")]
         public string? BatteryMode { get; set; }
+        [System.Text.Json.Serialization.JsonConverter(typeof(Shane32.EnphaseAPI.JsonConverters.EnabledDisabledConverter?))]
         [System.Text.Json.Serialization.JsonPropertyName("energy_independence")]
-        public string? EnergyIndependence { get; set; }
+        public bool? EnergyIndependence { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("reserve_soc")]
         public int? ReserveSoc { get; set; }
     }

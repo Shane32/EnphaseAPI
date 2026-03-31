@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -17,11 +19,13 @@ public class GetProductionMeterTelemetryResponse
     /// <summary>Gets or sets the total number of production meter devices.</summary>
     [JsonPropertyName("total_devices")] public int? TotalDevices { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the first interval in the response.</summary>
-    [JsonPropertyName("start_at")] public long? StartAt { get; set; }
+    /// <summary>Gets or sets the date and time of the first interval in the response.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("start_at")] public DateTimeOffset? StartAt { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the last interval in the response.</summary>
-    [JsonPropertyName("end_at")] public long? EndAt { get; set; }
+    /// <summary>Gets or sets the date and time of the last interval in the response.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("end_at")] public DateTimeOffset? EndAt { get; set; }
 
     /// <summary>Gets or sets the type of items contained in the intervals list.</summary>
     [JsonPropertyName("items")] public string? Items { get; set; }

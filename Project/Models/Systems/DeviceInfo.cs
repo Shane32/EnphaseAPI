@@ -1,5 +1,7 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -11,8 +13,9 @@ public class DeviceInfo
     /// <summary>Gets or sets the device identifier.</summary>
     [JsonPropertyName("id")] public long Id { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent data report from this device.</summary>
-    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent data report from this device.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_report_at")] public DateTimeOffset? LastReportAt { get; set; }
 
     /// <summary>Gets or sets the human-readable name of the device.</summary>
     [JsonPropertyName("name")] public string? Name { get; set; }

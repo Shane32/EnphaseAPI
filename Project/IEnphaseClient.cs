@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Shane32.EnphaseAPI.Models;
@@ -36,9 +37,9 @@ public interface IEnphaseClient
 
     /// <summary>Returns a summary of energy production for a system on a given date.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="summaryDate">The date to summarize (YYYY-MM-DD). Defaults to today when omitted.</param>
+    /// <param name="summaryDate">The date to summarize. Defaults to today when omitted.</param>
     /// <returns>A <see cref="SystemSummary"/> for the requested system and date.</returns>
-    public Task<SystemSummary> GetSystemSummaryAsync(int systemId, string? summaryDate = null);
+    public Task<SystemSummary> GetSystemSummaryAsync(int systemId, DateTimeOffset? summaryDate = null);
 
     /// <summary>Returns the devices associated with a system.</summary>
     /// <param name="systemId">The system identifier.</param>
@@ -52,18 +53,18 @@ public interface IEnphaseClient
 
     /// <summary>Returns events that occurred on a system within the specified time range.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startTime">Start of the time range as a Unix timestamp.</param>
-    /// <param name="endTime">End of the time range as a Unix timestamp. Defaults to the current time when omitted.</param>
+    /// <param name="startTime">Start of the time range.</param>
+    /// <param name="endTime">End of the time range. Defaults to the current time when omitted.</param>
     /// <returns>A <see cref="GetSystemEventsResponse"/> containing the events.</returns>
-    public Task<GetSystemEventsResponse> GetSystemEventsAsync(int systemId, long startTime, long? endTime = null);
+    public Task<GetSystemEventsResponse> GetSystemEventsAsync(int systemId, DateTimeOffset startTime, DateTimeOffset? endTime = null);
 
     /// <summary>Returns alarms that occurred on a system within the specified time range.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startTime">Start of the time range as a Unix timestamp.</param>
-    /// <param name="endTime">End of the time range as a Unix timestamp. Defaults to the current time when omitted.</param>
+    /// <param name="startTime">Start of the time range.</param>
+    /// <param name="endTime">End of the time range. Defaults to the current time when omitted.</param>
     /// <param name="cleared">When specified, filters alarms by their cleared status.</param>
     /// <returns>A <see cref="GetSystemAlarmsResponse"/> containing the alarms.</returns>
-    public Task<GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, long startTime, long? endTime = null, bool? cleared = null);
+    public Task<GetSystemAlarmsResponse> GetSystemAlarmsAsync(int systemId, DateTimeOffset startTime, DateTimeOffset? endTime = null, bool? cleared = null);
 
     /// <summary>Returns the available event types, optionally filtered by ID.</summary>
     /// <param name="eventTypeId">When specified, returns only the event type with this ID.</param>
@@ -87,108 +88,108 @@ public interface IEnphaseClient
 
     /// <summary>Returns the most recent production meter readings for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="endAt">Return readings up to this Unix timestamp. Defaults to the current time when omitted.</param>
+    /// <param name="endAt">Return readings up to this point in time. Defaults to the current time when omitted.</param>
     /// <returns>A <see cref="GetProductionMeterReadingsResponse"/> containing meter readings.</returns>
-    public Task<GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, long? endAt = null);
+    public Task<GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, DateTimeOffset? endAt = null);
 
     /// <summary>Returns revenue-grade meter (RGM) statistics for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the time range as a Unix timestamp.</param>
-    /// <param name="endAt">End of the time range as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the time range.</param>
+    /// <param name="endAt">End of the time range.</param>
     /// <returns>A <see cref="GetRgmStatsResponse"/> containing RGM interval data.</returns>
-    public Task<GetRgmStatsResponse> GetRgmStatsAsync(int systemId, long? startAt = null, long? endAt = null);
+    public Task<GetRgmStatsResponse> GetRgmStatsAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? endAt = null);
 
     /// <summary>Returns daily lifetime energy production values for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <param name="production">When set to <c>"all"</c>, includes all production sources.</param>
     /// <returns>A <see cref="GetEnergyLifetimeResponse"/> containing daily production in Wh.</returns>
-    public Task<GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, string? startDate = null, string? endDate = null, string? production = null);
+    public Task<GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null, string? production = null);
 
     /// <summary>Returns micro-inverter production telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetProductionMicroTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns production meter telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetProductionMeterTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     // Consumption
 
     /// <summary>Returns the most recent consumption meter readings for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="endAt">Return readings up to this Unix timestamp.</param>
+    /// <param name="endAt">Return readings up to this point in time.</param>
     /// <returns>A <see cref="GetConsumptionMeterReadingsResponse"/> containing meter readings.</returns>
-    public Task<GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, long? endAt = null);
+    public Task<GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, DateTimeOffset? endAt = null);
 
     /// <summary>Returns the most recent storage meter readings for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="endAt">Return readings up to this Unix timestamp.</param>
+    /// <param name="endAt">Return readings up to this point in time.</param>
     /// <returns>A <see cref="GetStorageMeterReadingsResponse"/> containing meter readings.</returns>
-    public Task<GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, long? endAt = null);
+    public Task<GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, DateTimeOffset? endAt = null);
 
     /// <summary>Returns daily lifetime energy consumption values for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetConsumptionLifetimeResponse"/> containing daily consumption in Wh.</returns>
-    public Task<GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+    public Task<GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns daily lifetime battery charge and discharge values for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetBatteryLifetimeResponse"/> containing daily charge/discharge in Wh.</returns>
-    public Task<GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+    public Task<GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns daily lifetime energy import values for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetEnergyImportLifetimeResponse"/> containing daily import in Wh.</returns>
-    public Task<GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+    public Task<GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns daily lifetime energy export values for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetEnergyExportLifetimeResponse"/> containing daily export in Wh.</returns>
-    public Task<GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+    public Task<GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns battery telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetBatteryTelemetryResponse"/> containing battery telemetry intervals.</returns>
-    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns consumption meter telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetConsumptionMeterTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns energy import telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetEnergyImportTelemetryResponse"/> containing import telemetry intervals.</returns>
-    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns energy export telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetEnergyExportTelemetryResponse"/> containing export telemetry intervals.</returns>
-    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, long? startAt = null, string? granularity = null);
+    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns the most recent telemetry data point for all devices on a system.</summary>
     /// <param name="systemId">The system identifier.</param>
@@ -200,51 +201,51 @@ public interface IEnphaseClient
     /// <summary>Returns telemetry intervals for a specific micro-inverter.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The micro-inverter serial number.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetMicroTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null);
+    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns telemetry intervals for a specific Encharge battery device.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The Encharge serial number.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <returns>A <see cref="GetEnchargeTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null);
+    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null);
 
     /// <summary>Returns daily lifetime energy consumption for a specific EVSE device.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EVSE serial number.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetEvseLifetimeResponse"/> containing daily consumption in Wh.</returns>
-    public Task<GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, string? startDate = null, string? endDate = null);
+    public Task<GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns telemetry intervals for a specific EVSE device.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EVSE serial number.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <param name="intervalDuration">Duration of each interval in minutes.</param>
     /// <returns>A <see cref="GetEvseTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, long? startAt = null, string? granularity = null, string? intervalDuration = null);
+    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null, string? intervalDuration = null);
 
     /// <summary>Returns daily lifetime energy consumption for heat pump devices on a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetHpLifetimeResponse"/> containing daily consumption in Wh.</returns>
-    public Task<GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, string? startDate = null, string? endDate = null);
+    public Task<GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
     /// <summary>Returns telemetry intervals for heat pump devices on a system.</summary>
     /// <param name="systemId">The system identifier.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the telemetry window.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
+    /// <param name="startDate">Start date of the telemetry window.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
     /// <param name="intervalDuration">Duration of each interval in minutes.</param>
     /// <returns>A <see cref="GetHpTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, long? startAt = null, string? startDate = null, string? granularity = null, string? intervalDuration = null);
+    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? startDate = null, string? granularity = null, string? intervalDuration = null);
 
     // Config
 
@@ -306,19 +307,19 @@ public interface IEnphaseClient
     /// <summary>Returns daily lifetime energy consumption for a specific EV charger.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EV charger serial number.</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the range.</param>
-    /// <param name="endDate">End date (YYYY-MM-DD) of the range.</param>
+    /// <param name="startDate">Start date of the range.</param>
+    /// <param name="endDate">End date of the range.</param>
     /// <returns>A <see cref="GetEvChargerLifetimeResponse"/> containing daily consumption in Wh.</returns>
-    public Task<GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, string startDate, string? endDate = null);
+    public Task<GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, DateTimeOffset startDate, DateTimeOffset? endDate = null);
 
     /// <summary>Returns telemetry intervals for a specific EV charger.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EV charger serial number.</param>
     /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
-    /// <param name="startDate">Start date (YYYY-MM-DD) of the telemetry window.</param>
-    /// <param name="startAt">Start of the telemetry window as a Unix timestamp.</param>
+    /// <param name="startDate">Start date of the telemetry window.</param>
+    /// <param name="startAt">Start of the telemetry window.</param>
     /// <returns>A <see cref="GetEvChargerTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, string? startDate = null, long? startAt = null);
+    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, DateTimeOffset? startDate = null, DateTimeOffset? startAt = null);
 
     /// <summary>Sends a command to start charging on a specific EV charger.</summary>
     /// <param name="systemId">The system identifier.</param>

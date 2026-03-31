@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -23,9 +25,11 @@ public class SystemAlarm
     /// <summary>Gets or sets the event type identifier for this alarm.</summary>
     [JsonPropertyName("event_type_id")] public int? EventTypeId { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the alarm started.</summary>
-    [JsonPropertyName("alarm_start_time")] public long? AlarmStartTime { get; set; }
+    /// <summary>Gets or sets the date and time when the alarm started.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("alarm_start_time")] public DateTimeOffset? AlarmStartTime { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the alarm ended.</summary>
-    [JsonPropertyName("alarm_end_time")] public long? AlarmEndTime { get; set; }
+    /// <summary>Gets or sets the date and time when the alarm ended.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("alarm_end_time")] public DateTimeOffset? AlarmEndTime { get; set; }
 }

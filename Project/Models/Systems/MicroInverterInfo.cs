@@ -1,5 +1,7 @@
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -44,6 +46,7 @@ public class MicroInverterInfo
     /// <summary>Gets or sets the grid profile applied to the micro-inverter.</summary>
     [JsonPropertyName("grid_profile")] public string? GridProfile { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent report from this micro-inverter.</summary>
-    [JsonPropertyName("last_report_date")] public long? LastReportDate { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent report from this micro-inverter.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_report_date")] public DateTimeOffset? LastReportDate { get; set; }
 }

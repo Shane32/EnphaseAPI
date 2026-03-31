@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Shane32.EnphaseAPI.JsonConverters;
 
 namespace Shane32.EnphaseAPI.Models;
 
@@ -38,20 +40,24 @@ public class SystemInfo
     /// <summary>Gets or sets the operational status of the system.</summary>
     [JsonPropertyName("status")] public string? Status { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent data report.</summary>
-    [JsonPropertyName("last_report_at")] public long? LastReportAt { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent data report.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_report_at")] public DateTimeOffset? LastReportAt { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp of the most recent energy production measurement.</summary>
-    [JsonPropertyName("last_energy_at")] public long? LastEnergyAt { get; set; }
+    /// <summary>Gets or sets the date and time of the most recent energy production measurement.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("last_energy_at")] public DateTimeOffset? LastEnergyAt { get; set; }
 
-    /// <summary>Gets or sets the Unix timestamp when the system first became operational.</summary>
-    [JsonPropertyName("operational_at")] public long? OperationalAt { get; set; }
+    /// <summary>Gets or sets the date and time when the system first became operational.</summary>
+    [JsonConverter(typeof(NullableUnixTimestampConverter))]
+    [JsonPropertyName("operational_at")] public DateTimeOffset? OperationalAt { get; set; }
 
     /// <summary>Gets or sets the attachment type of the system (e.g. "rooftop", "ground").</summary>
     [JsonPropertyName("attachment_type")] public string? AttachmentType { get; set; }
 
-    /// <summary>Gets or sets the grid interconnect date (YYYY-MM-DD).</summary>
-    [JsonPropertyName("interconnect_date")] public string? InterconnectDate { get; set; }
+    /// <summary>Gets or sets the grid interconnect date.</summary>
+    [JsonConverter(typeof(NullableDateTimeOffsetDateConverter))]
+    [JsonPropertyName("interconnect_date")] public DateTimeOffset? InterconnectDate { get; set; }
 
     /// <summary>Gets or sets the primary reference string for the system.</summary>
     [JsonPropertyName("reference")] public string? Reference { get; set; }

@@ -57,7 +57,7 @@ public class SystemsTests : TestBase
     public async Task GetSystemSummary_WithDateAsync()
     {
         SetupJsonResponse(@"{""system_id"":698910067,""current_power"":0,""energy_lifetime"":0,""energy_today"":0}");
-        await Client.GetSystemSummaryAsync(698910067, summaryDate: "2024-01-01");
+        await Client.GetSystemSummaryAsync(698910067, summaryDate: new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero));
         AssertRequest("/api/v4/systems/698910067/summary?summary_date=2024-01-01");
     }
 
@@ -84,7 +84,7 @@ public class SystemsTests : TestBase
     public async Task GetSystemEventsAsync()
     {
         SetupJsonResponse(@"{""events"":[],""system_id"":701644354}");
-        var result = await Client.GetSystemEventsAsync(701644354, 1740213328);
+        var result = await Client.GetSystemEventsAsync(701644354, DateTimeOffset.FromUnixTimeSeconds(1740213328));
         result.SystemId.ShouldBe(701644354);
         AssertRequest("/api/v4/systems/701644354/events?start_time=1740213328");
     }
@@ -93,7 +93,7 @@ public class SystemsTests : TestBase
     public async Task GetSystemAlarmsAsync()
     {
         SetupJsonResponse(@"{""alarms"":[],""system_id"":701644354}");
-        var result = await Client.GetSystemAlarmsAsync(701644354, 1740213328);
+        var result = await Client.GetSystemAlarmsAsync(701644354, DateTimeOffset.FromUnixTimeSeconds(1740213328));
         result.SystemId.ShouldBe(701644354);
         AssertRequest("/api/v4/systems/701644354/alarms?start_time=1740213328");
     }

@@ -53,10 +53,10 @@ public class EvChargerTests : TestBase
     public async Task GetEvChargerLifetimeAsync()
     {
         SetupJsonResponse(@"{""system_id"":698989834,""start_date"":""2024-01-01"",""consumption"":[3494,21929,0,0,0,0]}");
-        var result = await Client.GetEvChargerLifetimeAsync(698989834, "190179855", "20240101");
+        var result = await Client.GetEvChargerLifetimeAsync(698989834, "190179855", new DateTimeOffset(2024, 1, 1, 0, 0, 0, TimeSpan.Zero));
         result.SystemId.ShouldBe(698989834);
         result.Consumption!.Count.ShouldBe(6);
-        AssertRequest("/api/v4/systems/698989834/ev_charger/190179855/lifetime?start_date=20240101");
+        AssertRequest("/api/v4/systems/698989834/ev_charger/190179855/lifetime?start_date=2024-01-01");
     }
 
     [Fact]
