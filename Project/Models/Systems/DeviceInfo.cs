@@ -40,4 +40,10 @@ public class DeviceInfo
 
     /// <summary>Gets or sets the product name of the device.</summary>
     [JsonPropertyName("product_name")] public string? ProductName { get; set; }
+
+    /// <summary>Gets or sets a value indicating whether the device is FEOC compliant.</summary>
+    [JsonPropertyName("feoc_compliant")] public bool? FeocCompliant { get; set; }
+
+    /// <summary>Gets or sets a value indicating whether the device is DOM compliant.</summary>
+    [JsonPropertyName("dom_compliant")] public bool? DomCompliant { get; set; }
 }
