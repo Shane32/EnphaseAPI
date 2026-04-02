@@ -55,6 +55,8 @@ public class MyService(IEnphaseClient enphaseClient)
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
 | `ApiKey` | `string` | `""` | Your Enphase API key |
+| `ClientId` | `string` | `""` | OAuth 2.0 client ID for your application (not used by this library) |
+| `ClientSecret` | `string` | `""` | OAuth 2.0 client secret for your application (not used by this library); store in a secure configuration provider rather than in plain text |
 | `RetryCount` | `int` | `0` | Number of retry attempts on rate-limit or connectivity errors (0 = no retry) |
 | `RetryDelay` | `TimeSpan` | `TimeSpan.Zero` | Initial delay before each retry |
 | `RetryBackoffMultiplier` | `double` | `1.0` | Multiplier applied to the delay after each successive retry (1.0 = fixed delay, 2.0 = exponential backoff) |
@@ -75,6 +77,8 @@ Corresponding `appsettings.json`:
 {
   "EnphaseAPI": {
     "ApiKey": "your-api-key",
+    "ClientId": "your-client-id",
+    "ClientSecret": "your-client-secret",
     "RetryCount": 3,
     "RetryDelay": "00:00:01",
     "RetryBackoffMultiplier": 2.0
