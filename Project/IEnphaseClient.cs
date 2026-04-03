@@ -110,16 +110,16 @@ public interface IEnphaseClient
     /// <summary>Returns micro-inverter production telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetProductionMicroTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns production meter telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetProductionMeterTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     // Consumption
 
@@ -166,30 +166,30 @@ public interface IEnphaseClient
     /// <summary>Returns battery telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetBatteryTelemetryResponse"/> containing battery telemetry intervals.</returns>
-    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns consumption meter telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetConsumptionMeterTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns energy import telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetEnergyImportTelemetryResponse"/> containing import telemetry intervals.</returns>
-    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns energy export telemetry intervals for a system.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetEnergyExportTelemetryResponse"/> containing export telemetry intervals.</returns>
-    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns the most recent telemetry data point for all devices on a system.</summary>
     /// <param name="systemId">The system identifier.</param>
@@ -202,17 +202,17 @@ public interface IEnphaseClient
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The micro-inverter serial number.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetMicroTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns telemetry intervals for a specific Encharge battery device.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The Encharge serial number.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <returns>A <see cref="GetEnchargeTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null);
+    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null);
 
     /// <summary>Returns daily lifetime energy consumption for a specific EVSE device.</summary>
     /// <param name="systemId">The system identifier.</param>
@@ -226,10 +226,10 @@ public interface IEnphaseClient
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EVSE serial number.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <param name="intervalDuration">Duration of each interval in minutes.</param>
     /// <returns>A <see cref="GetEvseTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null, string? intervalDuration = null);
+    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null, string? intervalDuration = null);
 
     /// <summary>Returns daily lifetime energy consumption for heat pump devices on a system.</summary>
     /// <param name="systemId">The system identifier.</param>
@@ -242,10 +242,10 @@ public interface IEnphaseClient
     /// <param name="systemId">The system identifier.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
     /// <param name="startDate">Start date of the telemetry window.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <param name="intervalDuration">Duration of each interval in minutes.</param>
     /// <returns>A <see cref="GetHpTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? startDate = null, string? granularity = null, string? intervalDuration = null);
+    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? startDate = null, Granularity? granularity = null, string? intervalDuration = null);
 
     // Config
 
@@ -315,11 +315,11 @@ public interface IEnphaseClient
     /// <summary>Returns telemetry intervals for a specific EV charger.</summary>
     /// <param name="systemId">The system identifier.</param>
     /// <param name="serialNo">The EV charger serial number.</param>
-    /// <param name="granularity">Interval granularity (e.g. <c>"week"</c>, <c>"day"</c>, <c>"15mins"</c>).</param>
+    /// <param name="granularity">Interval granularity.</param>
     /// <param name="startDate">Start date of the telemetry window.</param>
     /// <param name="startAt">Start of the telemetry window.</param>
     /// <returns>A <see cref="GetEvChargerTelemetryResponse"/> containing telemetry intervals.</returns>
-    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, DateTimeOffset? startDate = null, DateTimeOffset? startAt = null);
+    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, Granularity? granularity = null, DateTimeOffset? startDate = null, DateTimeOffset? startAt = null);
 
     /// <summary>Sends a command to start charging on a specific EV charger.</summary>
     /// <param name="systemId">The system identifier.</param>

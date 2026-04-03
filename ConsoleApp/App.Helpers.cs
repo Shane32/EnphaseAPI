@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Shane32.EnphaseAPI.Models;
 
 internal sealed partial class App
 {
@@ -95,6 +96,25 @@ internal sealed partial class App
                     System.Globalization.DateTimeStyles.AssumeUniversal | System.Globalization.DateTimeStyles.AdjustToUniversal, out var dto))
                 return dto;
             Console.WriteLine("Invalid date. Please try again.");
+        }
+    }
+
+    private static Granularity? PromptGranularityOptional(string message)
+    {
+        while (true) {
+            Console.Write($"{message} (week/day/15mins/5min, optional, press Enter to skip): ");
+            var input = Console.ReadLine()?.Trim().ToLowerInvariant();
+            if (string.IsNullOrEmpty(input))
+                return null;
+            switch (input) {
+                case "week": return Granularity.Week;
+                case "day": return Granularity.Day;
+                case "15mins": return Granularity.FifteenMinutes;
+                case "5min": return Granularity.FiveMinutes;
+                default:
+                    Console.WriteLine("Invalid granularity. Valid values: week, day, 15mins, 5min. Please try again or press Enter to skip.");
+                    break;
+            }
         }
     }
 

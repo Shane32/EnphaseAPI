@@ -183,14 +183,14 @@ internal sealed partial class App
             case "4": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetProductionMicroTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
             case "5": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetProductionMeterTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
@@ -269,28 +269,28 @@ internal sealed partial class App
             case "7": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetBatteryTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
             case "8": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetConsumptionMeterTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
             case "9": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetEnergyImportTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
             case "10": {
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetEnergyExportTelemetryAsync(systemId, startAt, granularity));
                 break;
             }
@@ -330,7 +330,7 @@ internal sealed partial class App
                 var systemId = PromptInt("System ID: ");
                 var serialNo = Prompt("Serial number: ", required: true);
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetMicroTelemetryAsync(systemId, serialNo, startAt, granularity));
                 break;
             }
@@ -338,7 +338,7 @@ internal sealed partial class App
                 var systemId = PromptInt("System ID: ");
                 var serialNo = Prompt("Serial number: ", required: true);
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 PrintResponse(await client.GetEnchargeTelemetryAsync(systemId, serialNo, startAt, granularity));
                 break;
             }
@@ -354,7 +354,7 @@ internal sealed partial class App
                 var systemId = PromptInt("System ID: ");
                 var serialNo = Prompt("Serial number: ", required: true);
                 var startAt = PromptTimestampOptional("Start at");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 var intervalDuration = PromptOptional("Interval duration");
                 PrintResponse(await client.GetEvseTelemetryAsync(systemId, serialNo, startAt, granularity, intervalDuration));
                 break;
@@ -370,7 +370,7 @@ internal sealed partial class App
                 var systemId = PromptInt("System ID: ");
                 var startAt = PromptTimestampOptional("Start at");
                 var startDate = PromptDateOptional("Start date");
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 var intervalDuration = PromptOptional("Interval duration");
                 PrintResponse(await client.GetHpTelemetryAsync(systemId, startAt, startDate, granularity, intervalDuration));
                 break;
@@ -501,7 +501,7 @@ internal sealed partial class App
             case "6": {
                 var systemId = PromptInt("System ID: ");
                 var serialNo = Prompt("Serial number: ", required: true);
-                var granularity = PromptOptional("Granularity (e.g. 'day', 'week', 'month', 'year')");
+                var granularity = PromptGranularityOptional("Granularity");
                 var startDate = PromptDateOptional("Start date");
                 var startAt = PromptTimestampOptional("Start at");
                 PrintResponse(await client.GetEvChargerTelemetryAsync(systemId, serialNo, granularity, startDate, startAt));
