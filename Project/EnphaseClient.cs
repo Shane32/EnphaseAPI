@@ -366,29 +366,9 @@ public class EnphaseClient : IEnphaseClient
 
     /// <inheritdoc/>
     public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null)
-    /*
-    => GetAsync<GetMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/micros/{serialNo}/telemetry",
-        ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-        ("granularity", granularity?.ToApiString())));
-    */
-    {
-        startAt ??= DateTimeOffset.UtcNow;
-        granularity ??= Granularity.Day;
-        var endAt = granularity switch {
-            Granularity.Week => startAt.Value.AddHours(7 * 24), // add exactly 7*24 hours, versus adding 1 week which could be 7*24 or 7*24+1 hours depending on DST
-            Granularity.Day => startAt.Value.AddHours(24),
-            Granularity.FifteenMinutes => startAt.Value.AddMinutes(15),
-            Granularity.FiveMinutes => startAt.Value.AddMinutes(5),
-            _ => throw new ArgumentOutOfRangeException(nameof(granularity), "Invalid granularity value")
-        };
-        return GetMicroTelemetryAsync(systemId, serialNo, startAt.Value, endAt);
-    }
-
-    /// <inheritdoc/>
-    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset startAt, DateTimeOffset endAt)
         => GetAsync<GetMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/micros/{serialNo}/telemetry",
-            ("start_at", startAt.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("end_at", endAt.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))));
+            ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
     public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null)
