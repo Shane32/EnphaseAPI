@@ -287,16 +287,16 @@ public class EnphaseClient : IEnphaseClient
             ("production", production)));
 
     /// <inheritdoc/>
-    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetProductionMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/production_micro",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
-    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetProductionMeterTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/production_meter",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     // === Consumption ===
 
@@ -335,28 +335,28 @@ public class EnphaseClient : IEnphaseClient
             ("end_date", endDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))));
 
     /// <inheritdoc/>
-    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetBatteryTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/battery",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
-    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetConsumptionMeterTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/telemetry/consumption_meter",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
-    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetEnergyImportTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_import_telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
-    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetEnergyExportTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/energy_export_telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
     public Task<GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId)
@@ -365,16 +365,16 @@ public class EnphaseClient : IEnphaseClient
     // === Devices ===
 
     /// <inheritdoc/>
-    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetMicroTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/micros/{serialNo}/telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
-    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null)
+    public Task<GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null)
         => GetAsync<GetEnchargeTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/devices/encharges/{serialNo}/telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity)));
+            ("granularity", granularity?.ToApiString())));
 
     /// <inheritdoc/>
     public Task<GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, DateTimeOffset? startDate = null, DateTimeOffset? endDate = null)
@@ -383,10 +383,10 @@ public class EnphaseClient : IEnphaseClient
             ("end_date", endDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))));
 
     /// <inheritdoc/>
-    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, string? granularity = null, string? intervalDuration = null)
+    public Task<GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, DateTimeOffset? startAt = null, Granularity? granularity = null, string? intervalDuration = null)
         => GetAsync<GetEvseTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/{serialNo}/evse_telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
-            ("granularity", granularity),
+            ("granularity", granularity?.ToApiString()),
             ("interval_duration", intervalDuration)));
 
     /// <inheritdoc/>
@@ -396,11 +396,11 @@ public class EnphaseClient : IEnphaseClient
             ("end_date", endDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))));
 
     /// <inheritdoc/>
-    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? startDate = null, string? granularity = null, string? intervalDuration = null)
+    public Task<GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, DateTimeOffset? startAt = null, DateTimeOffset? startDate = null, Granularity? granularity = null, string? intervalDuration = null)
         => GetAsync<GetHpTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/hp_telemetry",
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
             ("start_date", startDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
-            ("granularity", granularity),
+            ("granularity", granularity?.ToApiString()),
             ("interval_duration", intervalDuration)));
 
     // === Config ===
@@ -455,9 +455,9 @@ public class EnphaseClient : IEnphaseClient
             ("end_date", endDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture))));
 
     /// <inheritdoc/>
-    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, DateTimeOffset? startDate = null, DateTimeOffset? startAt = null)
+    public Task<GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, Granularity? granularity = null, DateTimeOffset? startDate = null, DateTimeOffset? startAt = null)
         => GetAsync<GetEvChargerTelemetryResponse>(BuildUrl($"/api/v4/systems/{systemId}/ev_charger/{serialNo}/telemetry",
-            ("granularity", granularity),
+            ("granularity", granularity?.ToApiString()),
             ("start_date", startDate?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)),
             ("start_at", startAt?.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))));
 

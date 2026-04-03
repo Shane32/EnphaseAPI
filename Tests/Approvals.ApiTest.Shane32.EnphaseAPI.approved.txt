@@ -15,36 +15,36 @@ namespace Shane32.EnphaseAPI
         protected virtual System.Threading.Tasks.Task<TResponse> GetAsync<TResponse>(string url) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default, string? production = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset startDate, System.DateTimeOffset? endDate = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, Shane32.EnphaseAPI.Models.Granularity? granularity = default, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default, string? intervalDuration = null) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, string? granularity = null, string? intervalDuration = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default, string? intervalDuration = null) { }
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
-        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
+        public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? endAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default) { }
         public System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId) { }
@@ -113,36 +113,36 @@ namespace Shane32.EnphaseAPI
         string AccessToken { get; set; }
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryLifetimeResponse> GetBatteryLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.BatterySettings> GetBatterySettingsAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetBatteryTelemetryResponse> GetBatteryTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionLifetimeResponse> GetConsumptionLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterReadingsResponse> GetConsumptionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetConsumptionMeterTelemetryResponse> GetConsumptionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnchargeTelemetryResponse> GetEnchargeTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportLifetimeResponse> GetEnergyExportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyExportTelemetryResponse> GetEnergyExportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportLifetimeResponse> GetEnergyImportLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyImportTelemetryResponse> GetEnergyImportTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEnergyLifetimeResponse> GetEnergyLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default, string? production = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.EvChargerDevices> GetEvChargerDevicesAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerEventsResponse> GetEvChargerEventsAsync(int systemId, int? offset = default, string? serialNum = null, int? limit = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerLifetimeResponse> GetEvChargerLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset startDate, System.DateTimeOffset? endDate = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSchedulesResponse> GetEvChargerSchedulesAsync(int systemId, string serialNo);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerSessionsResponse> GetEvChargerSessionsAsync(int systemId, string serialNo, int? offset = default, int? limit = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, string? granularity = null, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvChargerTelemetryResponse> GetEvChargerTelemetryAsync(int systemId, string serialNo, Shane32.EnphaseAPI.Models.Granularity? granularity = default, System.DateTimeOffset? startDate = default, System.DateTimeOffset? startAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEventTypesResponse> GetEventTypesAsync(int? eventTypeId = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseLifetimeResponse> GetEvseLifetimeAsync(int systemId, string serialNo, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetEvseTelemetryResponse> GetEvseTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default, string? intervalDuration = null);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GridStatus> GetGridStatusAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpLifetimeResponse> GetHpLifetimeAsync(int systemId, System.DateTimeOffset? startDate = default, System.DateTimeOffset? endDate = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, string? granularity = null, string? intervalDuration = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetHpTelemetryResponse> GetHpTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? startDate = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default, string? intervalDuration = null);
         System.Threading.Tasks.Task<System.Collections.Generic.List<Shane32.EnphaseAPI.Models.InvertersSummaryItem>> GetInvertersSummaryAsync(int? siteId = default, int? envoySerialNumber = default, int? page = default, int? size = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLatestTelemetryResponse> GetLatestTelemetryAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetLoadControlResponse> GetLoadControlAsync(int systemId);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetMicroTelemetryResponse> GetMicroTelemetryAsync(int systemId, string serialNo, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetOpenEventsResponse> GetOpenEventsAsync(int systemId);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterReadingsResponse> GetProductionMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
-        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, string? granularity = null);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMeterTelemetryResponse> GetProductionMeterTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
+        System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetProductionMicroTelemetryResponse> GetProductionMicroTelemetryAsync(int systemId, System.DateTimeOffset? startAt = default, Shane32.EnphaseAPI.Models.Granularity? granularity = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetRgmStatsResponse> GetRgmStatsAsync(int systemId, System.DateTimeOffset? startAt = default, System.DateTimeOffset? endAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.GetStorageMeterReadingsResponse> GetStorageMeterReadingsAsync(int systemId, System.DateTimeOffset? endAt = default);
         System.Threading.Tasks.Task<Shane32.EnphaseAPI.Models.StormGuardSettings> GetStormGuardAsync(int systemId);
@@ -985,6 +985,13 @@ namespace Shane32.EnphaseAPI.Models
         public System.Collections.Generic.List<Shane32.EnphaseAPI.Models.SystemInfo>? Systems { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("total")]
         public int Total { get; set; }
+    }
+    public enum Granularity
+    {
+        Week = 0,
+        Day = 1,
+        FifteenMinutes = 2,
+        FiveMinutes = 3,
     }
     public class GridStatus
     {
